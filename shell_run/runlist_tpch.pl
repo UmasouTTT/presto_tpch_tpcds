@@ -5,7 +5,7 @@ use warnings;
 use File::Basename;
 use File::Path;
 
-open(log, ">tpch.log") or die "can not open tpch.log";
+open(LOG, ">tpch.log") or die "can not open tpch.log";
 
 # GLOBALS
 my $SCRIPT_NAME = basename( __FILE__ );
@@ -27,7 +27,7 @@ for my $query ( @queries ) {
 	my $warmEnd = time();
 	my $warmTime = $warmEnd - $warmStart ;
 	print "Warmed Query : $query In $warmTime secs\n";
-	print log "$query Warmed : $warmTime";
+	print LOG "$query Warmed : $warmTime";
 
 	print "Running Query : $query\n"; 
 	my $runStart = time();
@@ -37,7 +37,7 @@ for my $query ( @queries ) {
 	my $runEnd = time();
 	my $runTime = $runEnd - $runStart ;
 	print "$query Done in  $runTime secs\n";
-	print log "$query Done :  $runTime";
+	print LOG "$query Done :  $runTime";
 } # end for
 
-close log;
+close LOG;
