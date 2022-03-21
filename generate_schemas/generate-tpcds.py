@@ -44,7 +44,7 @@ for (new_schema, source_schema) in schemas:
     else:
         raise ValueError(new_schema)
 
-    print 'CREATE SCHEMA hive.%s;' % (new_schema,)
+    print （'CREATE SCHEMA hive.%s;' % (new_schema,)
     for table in tables:
         print 'CREATE TABLE "hive"."%s"."%s" WITH (format = \'%s\') AS SELECT * FROM %s."%s";' % \
               (new_schema, table, format, source_schema, table)
