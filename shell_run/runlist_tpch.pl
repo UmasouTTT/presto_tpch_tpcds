@@ -11,7 +11,7 @@ my $SCRIPT_PATH = dirname( __FILE__ );
 chdir $SCRIPT_PATH;
 chdir 'tpch';
 my @queries = glob '*.sql';
-touch "tpcds.log";
+touch tpcds.log;
 
 for my $query ( @queries ) {
 	my $warn_logfile = "$query.warn.log";
