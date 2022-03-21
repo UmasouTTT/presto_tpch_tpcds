@@ -5,14 +5,14 @@ WITH
      "i_item_id"
    , "sum"("ss_ext_sales_price") "total_sales"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer_address
-   , hive.tpcds_300gb_orc.item
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer_address
+   , tpcds.sf100.item
    WHERE ("i_item_id" IN (
       SELECT "i_item_id"
       FROM
-        hive.tpcds_300gb_orc.item
+        tpcds.sf100.item
       WHERE ("i_color" IN ('slate               '      , 'blanched            '      , 'burnished           '))
    ))
       AND ("ss_item_sk" = "i_item_sk")
@@ -28,14 +28,14 @@ WITH
      "i_item_id"
    , "sum"("cs_ext_sales_price") "total_sales"
    FROM
-     hive.tpcds_300gb_orc.catalog_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer_address
-   , hive.tpcds_300gb_orc.item
+     tpcds.sf100.catalog_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer_address
+   , tpcds.sf100.item
    WHERE ("i_item_id" IN (
       SELECT "i_item_id"
       FROM
-        hive.tpcds_300gb_orc.item
+        tpcds.sf100.item
       WHERE ("i_color" IN ('slate               '      , 'blanched            '      , 'burnished           '))
    ))
       AND ("cs_item_sk" = "i_item_sk")
@@ -51,14 +51,14 @@ WITH
      "i_item_id"
    , "sum"("ws_ext_sales_price") "total_sales"
    FROM
-     hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer_address
-   , hive.tpcds_300gb_orc.item
+     tpcds.sf100.web_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer_address
+   , tpcds.sf100.item
    WHERE ("i_item_id" IN (
       SELECT "i_item_id"
       FROM
-        hive.tpcds_300gb_orc.item
+        tpcds.sf100.item
       WHERE ("i_color" IN ('slate               '      , 'blanched            '      , 'burnished           '))
    ))
       AND ("ws_item_sk" = "i_item_sk")

@@ -5,18 +5,18 @@ WITH
      "i_item_id" "item_id"
    , "sum"("ss_ext_sales_price") "ss_item_rev"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.store_sales
+   , tpcds.sf100.item
+   , tpcds.sf100.date_dim
    WHERE ("ss_item_sk" = "i_item_sk")
       AND ("d_date" IN (
       SELECT "d_date"
       FROM
-        hive.tpcds_300gb_orc.date_dim
+        tpcds.sf100.date_dim
       WHERE ("d_week_seq" = (
             SELECT "d_week_seq"
             FROM
-              hive.tpcds_300gb_orc.date_dim
+              tpcds.sf100.date_dim
             WHERE ("d_date" = CAST('2000-01-03' AS DATE))
          ))
    ))
@@ -28,18 +28,18 @@ WITH
      "i_item_id" "item_id"
    , "sum"("cs_ext_sales_price") "cs_item_rev"
    FROM
-     hive.tpcds_300gb_orc.catalog_sales
-   , hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.catalog_sales
+   , tpcds.sf100.item
+   , tpcds.sf100.date_dim
    WHERE ("cs_item_sk" = "i_item_sk")
       AND ("d_date" IN (
       SELECT "d_date"
       FROM
-        hive.tpcds_300gb_orc.date_dim
+        tpcds.sf100.date_dim
       WHERE ("d_week_seq" = (
             SELECT "d_week_seq"
             FROM
-              hive.tpcds_300gb_orc.date_dim
+              tpcds.sf100.date_dim
             WHERE ("d_date" = CAST('2000-01-03' AS DATE))
          ))
    ))
@@ -51,18 +51,18 @@ WITH
      "i_item_id" "item_id"
    , "sum"("ws_ext_sales_price") "ws_item_rev"
    FROM
-     hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.web_sales
+   , tpcds.sf100.item
+   , tpcds.sf100.date_dim
    WHERE ("ws_item_sk" = "i_item_sk")
       AND ("d_date" IN (
       SELECT "d_date"
       FROM
-        hive.tpcds_300gb_orc.date_dim
+        tpcds.sf100.date_dim
       WHERE ("d_week_seq" = (
             SELECT "d_week_seq"
             FROM
-              hive.tpcds_300gb_orc.date_dim
+              tpcds.sf100.date_dim
             WHERE ("d_date" = CAST('2000-01-03' AS DATE))
          ))
    ))

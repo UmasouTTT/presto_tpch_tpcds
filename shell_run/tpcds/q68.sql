@@ -18,11 +18,11 @@ FROM
    , "sum"("ss_ext_list_price") "list_price"
    , "sum"("ss_ext_tax") "extended_tax"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.store
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.customer_address
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.store
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.customer_address
    WHERE ("store_sales"."ss_sold_date_sk" = "date_dim"."d_date_sk")
       AND ("store_sales"."ss_store_sk" = "store"."s_store_sk")
       AND ("store_sales"."ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
@@ -34,8 +34,8 @@ FROM
       AND ("store"."s_city" IN ('Midway'   , 'Fairview'))
    GROUP BY "ss_ticket_number", "ss_customer_sk", "ss_addr_sk", "ca_city"
 )  dn
-, hive.tpcds_300gb_orc.customer
-, hive.tpcds_300gb_orc.customer_address current_addr
+, tpcds.sf100.customer
+, tpcds.sf100.customer_address current_addr
 WHERE ("ss_customer_sk" = "c_customer_sk")
    AND ("customer"."c_current_addr_sk" = "current_addr"."ca_address_sk")
    AND ("current_addr"."ca_city" <> "bought_city")

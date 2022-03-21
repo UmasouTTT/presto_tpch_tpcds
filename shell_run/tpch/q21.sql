@@ -3,10 +3,10 @@ SELECT
   s.name, 
   count(*) as numwait
 FROM 
-  "hive"."tpch_300gb_orc"."supplier" s,
-  "hive"."tpch_300gb_orc"."lineitem" l1,
-  "hive"."tpch_300gb_orc"."orders" o,
-  "hive"."tpch_300gb_orc"."nation" n
+  tpcds.sf100.supplier s,
+  tpcds.sf100.lineitem l1,
+  tpcds.sf100.orders o,
+  tpcds.sf100.nation n
 WHERE 
   s.suppkey = l1.suppkey 
   AND o.orderkey = l1.orderkey
@@ -16,7 +16,7 @@ WHERE
     SELECT 
       * 
     FROM 
-      "hive"."tpch_300gb_orc"."lineitem" l2
+      tpcds.sf100.lineitem l2
     WHERE 
       l2.orderkey = l1.orderkey
       AND l2.suppkey <> l1.suppkey
@@ -25,7 +25,7 @@ WHERE
     SELECT 
       * 
     FROM 
-      "hive"."tpch_300gb_orc"."lineitem" l3
+      tpcds.sf100.lineitem l3
     WHERE 
       l3.orderkey = l1.orderkey 
       AND l3.suppkey <> l1.suppkey 

@@ -4,7 +4,7 @@ WITH revenue0 AS (
     l.suppkey as supplier_no,
     sum(l.extendedprice*(1-l.discount)) as total_revenue
   FROM 
-    "hive"."tpch_300gb_orc"."lineitem" l
+    tpcds.sf100.lineitem l
   WHERE 
     l.shipdate >= DATE '1996-01-01'
     AND l.shipdate < DATE '1996-01-01' + INTERVAL '3' MONTH
@@ -20,7 +20,7 @@ SELECT
   s.phone, 
   total_revenue
 FROM 
-  "hive"."tpch_300gb_orc"."supplier" s,
+  tpcds.sf100.supplier s,
   revenue0
 WHERE 
   s.suppkey = supplier_no 

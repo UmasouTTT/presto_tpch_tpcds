@@ -4,10 +4,10 @@ FROM
   (
    SELECT "count"(*) "h8_30_to_9"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.store
    WHERE ("ss_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ss_store_sk" = "s_store_sk")
@@ -24,10 +24,10 @@ FROM
 , (
    SELECT "count"(*) "h9_to_9_30"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.store
    WHERE ("ss_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ss_store_sk" = "s_store_sk")
@@ -44,10 +44,10 @@ FROM
 , (
    SELECT "count"(*) "h9_30_to_10"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.store
    WHERE ("ss_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ss_store_sk" = "s_store_sk")
@@ -64,10 +64,10 @@ FROM
 , (
    SELECT "count"(*) "h10_to_10_30"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.store
    WHERE ("ss_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ss_store_sk" = "s_store_sk")
@@ -84,10 +84,10 @@ FROM
 , (
    SELECT "count"(*) "h10_30_to_11"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.store
    WHERE ("ss_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ss_store_sk" = "s_store_sk")
@@ -104,10 +104,10 @@ FROM
 , (
    SELECT "count"(*) "h11_to_11_30"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.store
    WHERE ("ss_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ss_store_sk" = "s_store_sk")
@@ -124,10 +124,10 @@ FROM
 , (
    SELECT "count"(*) "h11_30_to_12"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.store
    WHERE ("ss_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ss_store_sk" = "s_store_sk")
@@ -144,10 +144,10 @@ FROM
 , (
    SELECT "count"(*) "h12_to_12_30"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.store
    WHERE ("ss_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ss_store_sk" = "s_store_sk")

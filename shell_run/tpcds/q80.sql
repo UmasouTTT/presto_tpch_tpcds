@@ -7,13 +7,13 @@ WITH
    , "sum"(COALESCE("sr_return_amt", 0)) "returns"
    , "sum"(("ss_net_profit" - COALESCE("sr_net_loss", 0))) "profit"
    FROM
-     (hive.tpcds_300gb_orc.store_sales
-   LEFT JOIN hive.tpcds_300gb_orc.store_returns ON ("ss_item_sk" = "sr_item_sk")
+     (tpcds.sf100.store_sales
+   LEFT JOIN tpcds.sf100.store_returns ON ("ss_item_sk" = "sr_item_sk")
       AND ("ss_ticket_number" = "sr_ticket_number"))
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.store
-   , hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.promotion
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.store
+   , tpcds.sf100.item
+   , tpcds.sf100.promotion
    WHERE ("ss_sold_date_sk" = "d_date_sk")
       AND (CAST("d_date" AS DATE) BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '30' DAY))
       AND ("ss_store_sk" = "s_store_sk")
@@ -30,13 +30,13 @@ WITH
    , "sum"(COALESCE("cr_return_amount", 0)) "returns"
    , "sum"(("cs_net_profit" - COALESCE("cr_net_loss", 0))) "profit"
    FROM
-     (hive.tpcds_300gb_orc.catalog_sales
-   LEFT JOIN hive.tpcds_300gb_orc.catalog_returns ON ("cs_item_sk" = "cr_item_sk")
+     (tpcds.sf100.catalog_sales
+   LEFT JOIN tpcds.sf100.catalog_returns ON ("cs_item_sk" = "cr_item_sk")
       AND ("cs_order_number" = "cr_order_number"))
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.catalog_page
-   , hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.promotion
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.catalog_page
+   , tpcds.sf100.item
+   , tpcds.sf100.promotion
    WHERE ("cs_sold_date_sk" = "d_date_sk")
       AND (CAST("d_date" AS DATE) BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '30' DAY))
       AND ("cs_catalog_page_sk" = "cp_catalog_page_sk")
@@ -53,13 +53,13 @@ WITH
    , "sum"(COALESCE("wr_return_amt", 0)) "returns"
    , "sum"(("ws_net_profit" - COALESCE("wr_net_loss", 0))) "profit"
    FROM
-     (hive.tpcds_300gb_orc.web_sales
-   LEFT JOIN hive.tpcds_300gb_orc.web_returns ON ("ws_item_sk" = "wr_item_sk")
+     (tpcds.sf100.web_sales
+   LEFT JOIN tpcds.sf100.web_returns ON ("ws_item_sk" = "wr_item_sk")
       AND ("ws_order_number" = "wr_order_number"))
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.web_site
-   , hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.promotion
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.web_site
+   , tpcds.sf100.item
+   , tpcds.sf100.promotion
    WHERE ("ws_sold_date_sk" = "d_date_sk")
       AND (CAST("d_date" AS DATE) BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '30' DAY))
       AND ("ws_web_site_sk" = "web_site_sk")
@@ -78,7 +78,7 @@ SELECT
 FROM
   (
    SELECT
-     'hive.tpcds_300gb_orc.store channel' "channel"
+     'tpcds.sf100.store channel' "channel"
    , "concat"('store', "store_id") "id"
    , "sales"
    , "returns"

@@ -13,10 +13,10 @@ FROM
    , "ss_customer_sk"
    , "count"(*) "cnt"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.store
-   , hive.tpcds_300gb_orc.household_demographics
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.store
+   , tpcds.sf100.household_demographics
    WHERE ("store_sales"."ss_sold_date_sk" = "date_dim"."d_date_sk")
       AND ("store_sales"."ss_store_sk" = "store"."s_store_sk")
       AND ("store_sales"."ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
@@ -29,7 +29,7 @@ FROM
       AND ("store"."s_county" IN ('Williamson County'   , 'Franklin Parish'   , 'Bronx County'   , 'Orange County'))
    GROUP BY "ss_ticket_number", "ss_customer_sk"
 )  dj
-, hive.tpcds_300gb_orc.customer
+, tpcds.sf100.customer
 WHERE ("ss_customer_sk" = "c_customer_sk")
    AND ("cnt" BETWEEN 1 AND 5)
 ORDER BY "cnt" DESC, "c_last_name" ASC;

@@ -7,8 +7,8 @@ SELECT
 , "i_wholesale_cost"
 , "i_brand"
 FROM
-  hive.tpcds_300gb_orc.store
-, hive.tpcds_300gb_orc.item
+  tpcds.sf100.store
+, tpcds.sf100.item
 , (
    SELECT
      "ss_store_sk"
@@ -20,8 +20,8 @@ FROM
       , "ss_item_sk"
       , "sum"("ss_sales_price") "revenue"
       FROM
-        hive.tpcds_300gb_orc.store_sales
-      , hive.tpcds_300gb_orc.date_dim
+        tpcds.sf100.store_sales
+      , tpcds.sf100.date_dim
       WHERE ("ss_sold_date_sk" = "d_date_sk")
          AND ("d_month_seq" BETWEEN 1176 AND (1176 + 11))
       GROUP BY "ss_store_sk", "ss_item_sk"
@@ -34,8 +34,8 @@ FROM
    , "ss_item_sk"
    , "sum"("ss_sales_price") "revenue"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
    WHERE ("ss_sold_date_sk" = "d_date_sk")
       AND ("d_month_seq" BETWEEN 1176 AND (1176 + 11))
    GROUP BY "ss_store_sk", "ss_item_sk"

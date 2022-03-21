@@ -9,14 +9,14 @@ FROM
       substr(c.phone,1,2) AS cntrycode,
       c.acctbal
     FROM 
-      "hive"."tpch_300gb_orc"."customer" c
+      tpcds.sf100.customer c
     WHERE 
       substr(c.phone,1,2) IN ('13', '31', '23', '29', '30', '18', '17')
       AND c.acctbal > (
         SELECT 
           avg(c.acctbal) 
         FROM 
-          "hive"."tpch_300gb_orc"."customer" c
+          tpcds.sf100.customer c
         WHERE 
           c.acctbal > 0.00 
           AND substr(c.phone,1,2) IN ('13', '31', '23', '29', '30', '18', '17')
@@ -25,7 +25,7 @@ FROM
         SELECT 
           * 
         FROM 
-          "hive"."tpch_300gb_orc"."orders" o
+          tpcds.sf100.orders o
         WHERE 
           o.custkey = c.custkey
       )

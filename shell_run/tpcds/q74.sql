@@ -9,9 +9,9 @@ WITH
    , "sum"("ss_net_paid") "year_total"
    , 's' "sale_type"
    FROM
-     hive.tpcds_300gb_orc.customer
-   , hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.customer
+   , tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
    WHERE ("c_customer_sk" = "ss_customer_sk")
       AND ("ss_sold_date_sk" = "d_date_sk")
       AND ("d_year" IN (2001   , (2001 + 1)))
@@ -24,9 +24,9 @@ UNION ALL    SELECT
    , "sum"("ws_net_paid") "year_total"
    , 'w' "sale_type"
    FROM
-     hive.tpcds_300gb_orc.customer
-   , hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.customer
+   , tpcds.sf100.web_sales
+   , tpcds.sf100.date_dim
    WHERE ("c_customer_sk" = "ws_bill_customer_sk")
       AND ("ws_sold_date_sk" = "d_date_sk")
       AND ("d_year" IN (2001   , (2001 + 1)))

@@ -3,20 +3,20 @@ SELECT
   s.name, 
   s.address 
 FROM 
-  "hive"."tpch_300gb_orc"."supplier" s,
-  "hive"."tpch_300gb_orc"."nation" n
+  tpcds.sf100.supplier s,
+  tpcds.sf100.nation n
 WHERE 
   s.suppkey IN (
     SELECT 
       ps.suppkey 
     FROM 
-      "hive"."tpch_300gb_orc"."partsupp" ps
+      tpcds.sf100.partsupp ps
     WHERE 
       ps.partkey IN (
         SELECT 
           p.partkey 
         FROM 
-          "hive"."tpch_300gb_orc"."part" p
+          tpcds.sf100.part p
         WHERE 
           p.name like 'forest%'
       ) 
@@ -24,7 +24,7 @@ WHERE
         SELECT 
           0.5*sum(l.quantity) 
         FROM 
-          "hive"."tpch_300gb_orc"."lineitem" l
+          tpcds.sf100.lineitem l
         WHERE 
           l.partkey = ps.partkey 
           AND l.suppkey = ps.suppkey 

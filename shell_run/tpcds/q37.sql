@@ -4,10 +4,10 @@ SELECT
 , "i_item_desc"
 , "i_current_price"
 FROM
-  hive.tpcds_300gb_orc.item
-, hive.tpcds_300gb_orc.inventory
-, hive.tpcds_300gb_orc.date_dim
-, hive.tpcds_300gb_orc.catalog_sales
+  tpcds.sf100.item
+, tpcds.sf100.inventory
+, tpcds.sf100.date_dim
+, tpcds.sf100.catalog_sales
 WHERE ("i_current_price" BETWEEN 68 AND (68 + 30))
    AND ("inv_item_sk" = "i_item_sk")
    AND ("d_date_sk" = "inv_date_sk")

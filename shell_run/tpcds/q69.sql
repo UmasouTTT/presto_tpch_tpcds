@@ -9,17 +9,17 @@ SELECT
 , "cd_credit_rating"
 , "count"(*) "cnt3"
 FROM
-  hive.tpcds_300gb_orc.customer c
-, hive.tpcds_300gb_orc.customer_address ca
-, hive.tpcds_300gb_orc.customer_demographics
+  tpcds.sf100.customer c
+, tpcds.sf100.customer_address ca
+, tpcds.sf100.customer_demographics
 WHERE ("c"."c_current_addr_sk" = "ca"."ca_address_sk")
    AND ("ca_state" IN ('KY', 'GA', 'NM'))
    AND ("cd_demo_sk" = "c"."c_current_cdemo_sk")
    AND (EXISTS (
    SELECT *
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
    WHERE ("c"."c_customer_sk" = "ss_customer_sk")
       AND ("ss_sold_date_sk" = "d_date_sk")
       AND ("d_year" = 2001)
@@ -28,8 +28,8 @@ WHERE ("c"."c_current_addr_sk" = "ca"."ca_address_sk")
    AND (NOT (EXISTS (
    SELECT *
    FROM
-     hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.web_sales
+   , tpcds.sf100.date_dim
    WHERE ("c"."c_customer_sk" = "ws_bill_customer_sk")
       AND ("ws_sold_date_sk" = "d_date_sk")
       AND ("d_year" = 2001)
@@ -38,8 +38,8 @@ WHERE ("c"."c_current_addr_sk" = "ca"."ca_address_sk")
    AND (NOT (EXISTS (
    SELECT *
    FROM
-     hive.tpcds_300gb_orc.catalog_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.catalog_sales
+   , tpcds.sf100.date_dim
    WHERE ("c"."c_customer_sk" = "cs_ship_customer_sk")
       AND ("cs_sold_date_sk" = "d_date_sk")
       AND ("d_year" = 2001)

@@ -5,12 +5,12 @@ SELECT
 , "avg"("ss_ext_wholesale_cost")
 , "sum"("ss_ext_wholesale_cost")
 FROM
-  hive.tpcds_300gb_orc.store_sales
-, hive.tpcds_300gb_orc.store
-, hive.tpcds_300gb_orc.customer_demographics
-, hive.tpcds_300gb_orc.household_demographics
-, hive.tpcds_300gb_orc.customer_address
-, hive.tpcds_300gb_orc.date_dim
+  tpcds.sf100.store_sales
+, tpcds.sf100.store
+, tpcds.sf100.customer_demographics
+, tpcds.sf100.household_demographics
+, tpcds.sf100.customer_address
+, tpcds.sf100.date_dim
 WHERE ("s_store_sk" = "ss_store_sk")
    AND ("ss_sold_date_sk" = "d_date_sk")
    AND ("d_year" = 2001)

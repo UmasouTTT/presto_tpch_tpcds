@@ -17,7 +17,7 @@ for my $query ( @queries ) {
 	my $logname = "$query.log";
 	print "Warming Query : $query\n"; 
 	my $warmStart = time();
-	my $cmd="(/usr/local/presto/presto --server namenode1:8084 --catalog tpcds -f ./$query) | tee  ../tpcds_logs/$warn_logfile > /dev/null";
+	my $cmd="(/home/ec2-user/trino/trino/bin/trino --server localhost:8001 --catalog hive -f ./$query) | tee  ../tpcds_logs/$warn_logfile > /dev/null";
 	my @warnoutput=`$cmd`;
 
 	my $warmEnd = time();
@@ -26,7 +26,7 @@ for my $query ( @queries ) {
 
 	print "Running Query : $query\n"; 
 	my $runStart = time();
-	my $cmd2="(/usr/local/presto/presto --server namenode1:8084 --catalog tpcds -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
+	my $cmd2="(/home/ec2-user/trino/trino/bin/trino --server localhost:8001 --catalog hive -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
 	my @runoutput=`$cmd2`;
 
 	my $runEnd = time();

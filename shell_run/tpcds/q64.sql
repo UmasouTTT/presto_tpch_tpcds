@@ -6,8 +6,8 @@ WITH
    , "sum"("cs_ext_list_price") "sale"
    , "sum"((("cr_refunded_cash" + "cr_reversed_charge") + "cr_store_credit")) "refund"
    FROM
-     hive.tpcds_300gb_orc.catalog_sales
-   , hive.tpcds_300gb_orc.catalog_returns
+     tpcds.sf100.catalog_sales
+   , tpcds.sf100.catalog_returns
    WHERE ("cs_item_sk" = "cr_item_sk")
       AND ("cs_order_number" = "cr_order_number")
    GROUP BY "cs_item_sk"
@@ -35,24 +35,24 @@ WITH
    , "sum"("ss_list_price") "s2"
    , "sum"("ss_coupon_amt") "s3"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.store_returns
+     tpcds.sf100.store_sales
+   , tpcds.sf100.store_returns
    , cs_ui
-   , hive.tpcds_300gb_orc.date_dim d1
-   , hive.tpcds_300gb_orc.date_dim d2
-   , hive.tpcds_300gb_orc.date_dim d3
-   , hive.tpcds_300gb_orc.store
-   , hive.tpcds_300gb_orc.customer
-   , hive.tpcds_300gb_orc.customer_demographics cd1
-   , hive.tpcds_300gb_orc.customer_demographics cd2
-   , hive.tpcds_300gb_orc.promotion
-   , hive.tpcds_300gb_orc.household_demographics hd1
-   , hive.tpcds_300gb_orc.household_demographics hd2
-   , hive.tpcds_300gb_orc.customer_address ad1
-   , hive.tpcds_300gb_orc.customer_address ad2
-   , hive.tpcds_300gb_orc.income_band ib1
-   , hive.tpcds_300gb_orc.income_band ib2
-   , hive.tpcds_300gb_orc.item
+   , tpcds.sf100.date_dim d1
+   , tpcds.sf100.date_dim d2
+   , tpcds.sf100.date_dim d3
+   , tpcds.sf100.store
+   , tpcds.sf100.customer
+   , tpcds.sf100.customer_demographics cd1
+   , tpcds.sf100.customer_demographics cd2
+   , tpcds.sf100.promotion
+   , tpcds.sf100.household_demographics hd1
+   , tpcds.sf100.household_demographics hd2
+   , tpcds.sf100.customer_address ad1
+   , tpcds.sf100.customer_address ad2
+   , tpcds.sf100.income_band ib1
+   , tpcds.sf100.income_band ib2
+   , tpcds.sf100.item
    WHERE ("ss_store_sk" = "s_store_sk")
       AND ("ss_sold_date_sk" = "d1"."d_date_sk")
       AND ("ss_customer_sk" = "c_customer_sk")

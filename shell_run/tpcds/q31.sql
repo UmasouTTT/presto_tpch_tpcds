@@ -7,9 +7,9 @@ WITH
    , "d_year"
    , "sum"("ss_ext_sales_price") "store_sales"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer_address
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer_address
    WHERE ("ss_sold_date_sk" = "d_date_sk")
       AND ("ss_addr_sk" = "ca_address_sk")
    GROUP BY "ca_county", "d_qoy", "d_year"
@@ -21,9 +21,9 @@ WITH
    , "d_year"
    , "sum"("ws_ext_sales_price") "web_sales"
    FROM
-     hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer_address
+     tpcds.sf100.web_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer_address
    WHERE ("ws_sold_date_sk" = "d_date_sk")
       AND ("ws_bill_addr_sk" = "ca_address_sk")
    GROUP BY "ca_county", "d_qoy", "d_year"

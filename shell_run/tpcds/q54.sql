@@ -11,17 +11,17 @@ WITH
       , "cs_bill_customer_sk" "customer_sk"
       , "cs_item_sk" "item_sk"
       FROM
-        hive.tpcds_300gb_orc.catalog_sales
+        tpcds.sf100.catalog_sales
 UNION ALL       SELECT
         "ws_sold_date_sk" "sold_date_sk"
       , "ws_bill_customer_sk" "customer_sk"
       , "ws_item_sk" "item_sk"
       FROM
-        hive.tpcds_300gb_orc.web_sales
+        tpcds.sf100.web_sales
    )  cs_or_ws_sales
-   , hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer
+   , tpcds.sf100.item
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer
    WHERE ("sold_date_sk" = "d_date_sk")
       AND ("item_sk" = "i_item_sk")
       AND ("i_category" = 'Women                                             ')
@@ -36,10 +36,10 @@ UNION ALL       SELECT
    , "sum"("ss_ext_sales_price") "revenue"
    FROM
      my_customers
-   , hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.customer_address
-   , hive.tpcds_300gb_orc.store
-   , hive.tpcds_300gb_orc.date_dim
+   , tpcds.sf100.store_sales
+   , tpcds.sf100.customer_address
+   , tpcds.sf100.store
+   , tpcds.sf100.date_dim
    WHERE ("c_current_addr_sk" = "ca_address_sk")
       AND ("ca_county" = "s_county")
       AND ("ca_state" = "s_state")
@@ -48,13 +48,13 @@ UNION ALL       SELECT
       AND ("d_month_seq" BETWEEN (
       SELECT DISTINCT ("d_month_seq" + 1)
       FROM
-        hive.tpcds_300gb_orc.date_dim
+        tpcds.sf100.date_dim
       WHERE ("d_year" = 1998)
          AND ("d_moy" = 12)
    ) AND (
       SELECT DISTINCT ("d_month_seq" + 3)
       FROM
-        hive.tpcds_300gb_orc.date_dim
+        tpcds.sf100.date_dim
       WHERE ("d_year" = 1998)
          AND ("d_moy" = 12)
    ))

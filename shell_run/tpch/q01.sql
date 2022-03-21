@@ -11,7 +11,7 @@ SELECT
   avg(l.discount)                                       AS avg_disc,
   count(*)                                              AS count_order
 FROM
-  "hive"."tpch_300gb_orc"."lineitem" AS l
+  tpch.sf100.lineitem AS l
 WHERE
   l.shipdate <= DATE '1998-12-01' - INTERVAL '90' DAY
 GROUP BY

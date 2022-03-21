@@ -3,9 +3,9 @@ SELECT
   "s_store_name"
 , "sum"("ss_net_profit")
 FROM
-  hive.tpcds_300gb_orc.store_sales
-, hive.tpcds_300gb_orc.date_dim
-, hive.tpcds_300gb_orc.store
+  tpcds.sf100.store_sales
+, tpcds.sf100.date_dim
+, tpcds.sf100.store
 , (
    SELECT "ca_zip"
    FROM
@@ -13,7 +13,7 @@ FROM
 (
          SELECT "substr"("ca_zip", 1, 5) "ca_zip"
          FROM
-           hive.tpcds_300gb_orc.customer_address
+           tpcds.sf100.customer_address
          WHERE ("substr"("ca_zip", 1, 5) IN (
                 '24128     '
               , '57834     '
@@ -423,8 +423,8 @@ FROM
               "substr"("ca_zip", 1, 5) "ca_zip"
             , "count"(*) "cnt"
             FROM
-              hive.tpcds_300gb_orc.customer_address
-            , hive.tpcds_300gb_orc.customer
+              tpcds.sf100.customer_address
+            , tpcds.sf100.customer
             WHERE ("ca_address_sk" = "c_current_addr_sk")
                AND ("c_preferred_cust_flag" = 'Y')
             GROUP BY "ca_zip"

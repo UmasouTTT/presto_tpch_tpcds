@@ -7,13 +7,13 @@ FROM
   (
    SELECT "sum"("ss_ext_sales_price") "promotions"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.store
-   , hive.tpcds_300gb_orc.promotion
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer
-   , hive.tpcds_300gb_orc.customer_address
-   , hive.tpcds_300gb_orc.item
+     tpcds.sf100.store_sales
+   , tpcds.sf100.store
+   , tpcds.sf100.promotion
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer
+   , tpcds.sf100.customer_address
+   , tpcds.sf100.item
    WHERE ("ss_sold_date_sk" = "d_date_sk")
       AND ("ss_store_sk" = "s_store_sk")
       AND ("ss_promo_sk" = "p_promo_sk")
@@ -32,12 +32,12 @@ FROM
 , (
    SELECT "sum"("ss_ext_sales_price") "total"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.store
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer
-   , hive.tpcds_300gb_orc.customer_address
-   , hive.tpcds_300gb_orc.item
+     tpcds.sf100.store_sales
+   , tpcds.sf100.store
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer
+   , tpcds.sf100.customer_address
+   , tpcds.sf100.item
    WHERE ("ss_sold_date_sk" = "d_date_sk")
       AND ("ss_store_sk" = "s_store_sk")
       AND ("ss_customer_sk" = "c_customer_sk")

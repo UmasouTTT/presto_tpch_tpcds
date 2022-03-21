@@ -6,9 +6,9 @@ SELECT
 , "i_category"
 , "avg"("inv_quantity_on_hand") "qoh"
 FROM
-  hive.tpcds_300gb_orc.inventory
-, hive.tpcds_300gb_orc.date_dim
-, hive.tpcds_300gb_orc.item
+  tpcds.sf100.inventory
+, tpcds.sf100.date_dim
+, tpcds.sf100.item
 WHERE ("inv_date_sk" = "d_date_sk")
    AND ("inv_item_sk" = "i_item_sk")
    AND ("d_month_seq" BETWEEN 1200 AND (1200 + 11))

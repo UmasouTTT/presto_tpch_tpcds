@@ -80,11 +80,11 @@ FROM
       , "sum"((CASE WHEN ("d_moy" = 11) THEN ("ws_net_paid" * "ws_quantity") ELSE 0 END)) "nov_net"
       , "sum"((CASE WHEN ("d_moy" = 12) THEN ("ws_net_paid" * "ws_quantity") ELSE 0 END)) "dec_net"
       FROM
-        hive.tpcds_300gb_orc.web_sales
-      , hive.tpcds_300gb_orc.warehouse
-      , hive.tpcds_300gb_orc.date_dim
-      , hive.tpcds_300gb_orc.time_dim
-      , hive.tpcds_300gb_orc.ship_mode
+        tpcds.sf100.web_sales
+      , tpcds.sf100.warehouse
+      , tpcds.sf100.date_dim
+      , tpcds.sf100.time_dim
+      , tpcds.sf100.ship_mode
       WHERE ("ws_warehouse_sk" = "w_warehouse_sk")
          AND ("ws_sold_date_sk" = "d_date_sk")
          AND ("ws_sold_time_sk" = "t_time_sk")
@@ -128,11 +128,11 @@ FROM
       , "sum"((CASE WHEN ("d_moy" = 11) THEN ("cs_net_paid_inc_tax" * "cs_quantity") ELSE 0 END)) "nov_net"
       , "sum"((CASE WHEN ("d_moy" = 12) THEN ("cs_net_paid_inc_tax" * "cs_quantity") ELSE 0 END)) "dec_net"
       FROM
-        hive.tpcds_300gb_orc.catalog_sales
-      , hive.tpcds_300gb_orc.warehouse
-      , hive.tpcds_300gb_orc.date_dim
-      , hive.tpcds_300gb_orc.time_dim
-      , hive.tpcds_300gb_orc.ship_mode
+        tpcds.sf100.catalog_sales
+      , tpcds.sf100.warehouse
+      , tpcds.sf100.date_dim
+      , tpcds.sf100.time_dim
+      , tpcds.sf100.ship_mode
       WHERE ("cs_warehouse_sk" = "w_warehouse_sk")
          AND ("cs_sold_date_sk" = "d_date_sk")
          AND ("cs_sold_time_sk" = "t_time_sk")

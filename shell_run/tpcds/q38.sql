@@ -7,9 +7,9 @@ FROM
    , "c_first_name"
    , "d_date"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer
    WHERE ("store_sales"."ss_sold_date_sk" = "date_dim"."d_date_sk")
       AND ("store_sales"."ss_customer_sk" = "customer"."c_customer_sk")
       AND ("d_month_seq" BETWEEN 1200 AND (1200 + 11))
@@ -18,9 +18,9 @@ INTERSECT    SELECT DISTINCT
    , "c_first_name"
    , "d_date"
    FROM
-     hive.tpcds_300gb_orc.catalog_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer
+     tpcds.sf100.catalog_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer
    WHERE ("catalog_sales"."cs_sold_date_sk" = "date_dim"."d_date_sk")
       AND ("catalog_sales"."cs_bill_customer_sk" = "customer"."c_customer_sk")
       AND ("d_month_seq" BETWEEN 1200 AND (1200 + 11))
@@ -29,9 +29,9 @@ INTERSECT    SELECT DISTINCT
    , "c_first_name"
    , "d_date"
    FROM
-     hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.customer
+     tpcds.sf100.web_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.customer
    WHERE ("web_sales"."ws_sold_date_sk" = "date_dim"."d_date_sk")
       AND ("web_sales"."ws_bill_customer_sk" = "customer"."c_customer_sk")
       AND ("d_month_seq" BETWEEN 1200 AND (1200 + 11))

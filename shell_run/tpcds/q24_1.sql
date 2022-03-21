@@ -14,12 +14,12 @@ WITH
    , "i_size"
    , "sum"("ss_net_paid") "netpaid"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.store_returns
-   , hive.tpcds_300gb_orc.store
-   , hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.customer
-   , hive.tpcds_300gb_orc.customer_address
+     tpcds.sf100.store_sales
+   , tpcds.sf100.store_returns
+   , tpcds.sf100.store
+   , tpcds.sf100.item
+   , tpcds.sf100.customer
+   , tpcds.sf100.customer_address
    WHERE ("ss_ticket_number" = "sr_ticket_number")
       AND ("ss_item_sk" = "sr_item_sk")
       AND ("ss_customer_sk" = "c_customer_sk")

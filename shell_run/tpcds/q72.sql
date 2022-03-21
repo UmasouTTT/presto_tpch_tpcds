@@ -7,17 +7,17 @@ SELECT
 , "sum"((CASE WHEN ("p_promo_sk" IS NOT NULL) THEN 1 ELSE 0 END)) "promo"
 , "count"(*) "total_cnt"
 FROM
-  ((((((((((hive.tpcds_300gb_orc.catalog_sales
-INNER JOIN hive.tpcds_300gb_orc.inventory ON ("cs_item_sk" = "inv_item_sk"))
-INNER JOIN hive.tpcds_300gb_orc.warehouse ON ("w_warehouse_sk" = "inv_warehouse_sk"))
-INNER JOIN hive.tpcds_300gb_orc.item ON ("i_item_sk" = "cs_item_sk"))
-INNER JOIN hive.tpcds_300gb_orc.customer_demographics ON ("cs_bill_cdemo_sk" = "cd_demo_sk"))
-INNER JOIN hive.tpcds_300gb_orc.household_demographics ON ("cs_bill_hdemo_sk" = "hd_demo_sk"))
-INNER JOIN hive.tpcds_300gb_orc.date_dim d1 ON ("cs_sold_date_sk" = "d1"."d_date_sk"))
-INNER JOIN hive.tpcds_300gb_orc.date_dim d2 ON ("inv_date_sk" = "d2"."d_date_sk"))
-INNER JOIN hive.tpcds_300gb_orc.date_dim d3 ON ("cs_ship_date_sk" = "d3"."d_date_sk"))
-LEFT JOIN hive.tpcds_300gb_orc.promotion ON ("cs_promo_sk" = "p_promo_sk"))
-LEFT JOIN hive.tpcds_300gb_orc.catalog_returns ON ("cr_item_sk" = "cs_item_sk")
+  ((((((((((tpcds.sf100.catalog_sales
+INNER JOIN tpcds.sf100.inventory ON ("cs_item_sk" = "inv_item_sk"))
+INNER JOIN tpcds.sf100.warehouse ON ("w_warehouse_sk" = "inv_warehouse_sk"))
+INNER JOIN tpcds.sf100.item ON ("i_item_sk" = "cs_item_sk"))
+INNER JOIN tpcds.sf100.customer_demographics ON ("cs_bill_cdemo_sk" = "cd_demo_sk"))
+INNER JOIN tpcds.sf100.household_demographics ON ("cs_bill_hdemo_sk" = "hd_demo_sk"))
+INNER JOIN tpcds.sf100.date_dim d1 ON ("cs_sold_date_sk" = "d1"."d_date_sk"))
+INNER JOIN tpcds.sf100.date_dim d2 ON ("inv_date_sk" = "d2"."d_date_sk"))
+INNER JOIN tpcds.sf100.date_dim d3 ON ("cs_ship_date_sk" = "d3"."d_date_sk"))
+LEFT JOIN tpcds.sf100.promotion ON ("cs_promo_sk" = "p_promo_sk"))
+LEFT JOIN tpcds.sf100.catalog_returns ON ("cr_item_sk" = "cs_item_sk")
    AND ("cr_order_number" = "cs_order_number"))
 WHERE ("d1"."d_week_seq" = "d2"."d_week_seq")
    AND ("inv_quantity_on_hand" < "cs_quantity")

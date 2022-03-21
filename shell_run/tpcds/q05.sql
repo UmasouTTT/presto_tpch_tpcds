@@ -17,7 +17,7 @@ WITH
       , CAST(0 AS DECIMAL(7,2)) "return_amt"
       , CAST(0 AS DECIMAL(7,2)) "net_loss"
       FROM
-        hive.tpcds_300gb_orc.store_sales
+        tpcds.sf100.store_sales
 UNION ALL       SELECT
         "sr_store_sk" "store_sk"
       , "sr_returned_date_sk" "date_sk"
@@ -26,10 +26,10 @@ UNION ALL       SELECT
       , "sr_return_amt" "return_amt"
       , "sr_net_loss" "net_loss"
       FROM
-        hive.tpcds_300gb_orc.store_returns
+        tpcds.sf100.store_returns
    )  salesreturns
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.store
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.store
    WHERE ("date_sk" = "d_date_sk")
       AND ("d_date" BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '14' DAY))
       AND ("store_sk" = "s_store_sk")
@@ -52,7 +52,7 @@ UNION ALL       SELECT
       , CAST(0 AS DECIMAL(7,2)) "return_amt"
       , CAST(0 AS DECIMAL(7,2)) "net_loss"
       FROM
-        hive.tpcds_300gb_orc.catalog_sales
+        tpcds.sf100.catalog_sales
 UNION ALL       SELECT
         "cr_catalog_page_sk" "page_sk"
       , "cr_returned_date_sk" "date_sk"
@@ -61,10 +61,10 @@ UNION ALL       SELECT
       , "cr_return_amount" "return_amt"
       , "cr_net_loss" "net_loss"
       FROM
-        hive.tpcds_300gb_orc.catalog_returns
+        tpcds.sf100.catalog_returns
    )  salesreturns
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.catalog_page
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.catalog_page
    WHERE ("date_sk" = "d_date_sk")
       AND ("d_date" BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '14' DAY))
       AND ("page_sk" = "cp_catalog_page_sk")
@@ -87,7 +87,7 @@ UNION ALL       SELECT
       , CAST(0 AS DECIMAL(7,2)) "return_amt"
       , CAST(0 AS DECIMAL(7,2)) "net_loss"
       FROM
-        hive.tpcds_300gb_orc.web_sales
+        tpcds.sf100.web_sales
 UNION ALL       SELECT
         "ws_web_site_sk" "wsr_web_site_sk"
       , "wr_returned_date_sk" "date_sk"
@@ -96,12 +96,12 @@ UNION ALL       SELECT
       , "wr_return_amt" "return_amt"
       , "wr_net_loss" "net_loss"
       FROM
-        (hive.tpcds_300gb_orc.web_returns
-      LEFT JOIN hive.tpcds_300gb_orc.web_sales ON ("wr_item_sk" = "ws_item_sk")
+        (tpcds.sf100.web_returns
+      LEFT JOIN tpcds.sf100.web_sales ON ("wr_item_sk" = "ws_item_sk")
          AND ("wr_order_number" = "ws_order_number"))
    )  salesreturns
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.web_site
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.web_site
    WHERE ("date_sk" = "d_date_sk")
       AND ("d_date" BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '14' DAY))
       AND ("wsr_web_site_sk" = "web_site_sk")
@@ -116,7 +116,7 @@ SELECT
 FROM
   (
    SELECT
-     'hive.tpcds_300gb_orc.store channel' "channel"
+     'tpcds.sf100.store channel' "channel"
    , "concat"('store', "s_store_id") "id"
    , "sales"
    , "returns"

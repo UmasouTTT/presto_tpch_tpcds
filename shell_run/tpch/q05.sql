@@ -3,12 +3,12 @@ SELECT
   n.name,
   sum(l.extendedprice * (1 - l.discount)) AS revenue
 FROM
-  "hive"."tpch_300gb_orc"."customer" AS c,
-  "hive"."tpch_300gb_orc"."orders" AS o,
-  "hive"."tpch_300gb_orc"."lineitem" AS l,
-  "hive"."tpch_300gb_orc"."supplier" AS s,
-  "hive"."tpch_300gb_orc"."nation" AS n,
-  "hive"."tpch_300gb_orc"."region" AS r
+  tpcds.sf100.customer AS c,
+  tpcds.sf100.orders AS o,
+  tpcds.sf100.lineitem AS l,
+  tpcds.sf100.supplier AS s,
+  tpcds.sf100.nation AS n,
+  tpcds.sf100.region AS r
 WHERE
   c.custkey = o.custkey
   AND l.orderkey = o.orderkey

@@ -12,13 +12,13 @@ SELECT
 , "avg"(CAST("c_birth_year" AS DECIMAL(12,2))) "agg6"
 , "avg"(CAST("cd1"."cd_dep_count" AS DECIMAL(12,2))) "agg7"
 FROM
-  hive.tpcds_300gb_orc.catalog_sales
-, hive.tpcds_300gb_orc.customer_demographics cd1
-, hive.tpcds_300gb_orc.customer_demographics cd2
-, hive.tpcds_300gb_orc.customer
-, hive.tpcds_300gb_orc.customer_address
-, hive.tpcds_300gb_orc.date_dim
-, hive.tpcds_300gb_orc.item
+  tpcds.sf100.catalog_sales
+, tpcds.sf100.customer_demographics cd1
+, tpcds.sf100.customer_demographics cd2
+, tpcds.sf100.customer
+, tpcds.sf100.customer_address
+, tpcds.sf100.date_dim
+, tpcds.sf100.item
 WHERE ("cs_sold_date_sk" = "d_date_sk")
    AND ("cs_item_sk" = "i_item_sk")
    AND ("cs_bill_cdemo_sk" = "cd1"."cd_demo_sk")

@@ -6,8 +6,8 @@ WITH
    , "d_date"
    , "sum"("sum"("ws_sales_price")) OVER (PARTITION BY "ws_item_sk" ORDER BY "d_date" ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) "cume_sales"
    FROM
-     hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.web_sales
+   , tpcds.sf100.date_dim
    WHERE ("ws_sold_date_sk" = "d_date_sk")
       AND ("d_month_seq" BETWEEN 1200 AND (1200 + 11))
       AND ("ws_item_sk" IS NOT NULL)
@@ -19,8 +19,8 @@ WITH
    , "d_date"
    , "sum"("sum"("ss_sales_price")) OVER (PARTITION BY "ss_item_sk" ORDER BY "d_date" ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) "cume_sales"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
    WHERE ("ss_sold_date_sk" = "d_date_sk")
       AND ("d_month_seq" BETWEEN 1200 AND (1200 + 11))
       AND ("ss_item_sk" IS NOT NULL)

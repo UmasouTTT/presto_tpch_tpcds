@@ -19,11 +19,11 @@ SELECT
    AND (("sr_returned_date_sk" - "ss_sold_date_sk") <= 120) THEN 1 ELSE 0 END)) "91-120 days"
 , "sum"((CASE WHEN (("sr_returned_date_sk" - "ss_sold_date_sk") > 120) THEN 1 ELSE 0 END)) ">120 days"
 FROM
-  hive.tpcds_300gb_orc.store_sales
-, hive.tpcds_300gb_orc.store_returns
-, hive.tpcds_300gb_orc.store
-, hive.tpcds_300gb_orc.date_dim d1
-, hive.tpcds_300gb_orc.date_dim d2
+  tpcds.sf100.store_sales
+, tpcds.sf100.store_returns
+, tpcds.sf100.store
+, tpcds.sf100.date_dim d1
+, tpcds.sf100.date_dim d2
 WHERE ("d2"."d_year" = 2001)
    AND ("d2"."d_moy" = 8)
    AND ("ss_ticket_number" = "sr_ticket_number")

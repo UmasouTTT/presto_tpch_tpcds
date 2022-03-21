@@ -8,10 +8,10 @@ FROM
    , "sum"((CASE WHEN (CAST("d_date" AS DATE) < CAST('2000-03-11' AS DATE)) THEN "inv_quantity_on_hand" ELSE 0 END)) "inv_before"
    , "sum"((CASE WHEN (CAST("d_date" AS DATE) >= CAST('2000-03-11' AS DATE)) THEN "inv_quantity_on_hand" ELSE 0 END)) "inv_after"
    FROM
-     hive.tpcds_300gb_orc.inventory
-   , hive.tpcds_300gb_orc.warehouse
-   , hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.inventory
+   , tpcds.sf100.warehouse
+   , tpcds.sf100.item
+   , tpcds.sf100.date_dim
    WHERE ("i_current_price" BETWEEN DECIMAL '0.99' AND DECIMAL '1.49')
       AND ("i_item_sk" = "inv_item_sk")
       AND ("inv_warehouse_sk" = "w_warehouse_sk")

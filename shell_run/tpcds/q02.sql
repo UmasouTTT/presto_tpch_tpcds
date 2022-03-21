@@ -10,14 +10,14 @@ WITH
         "ws_sold_date_sk" "sold_date_sk"
       , "ws_ext_sales_price" "sales_price"
       FROM
-        hive.tpcds_300gb_orc.web_sales
+        tpcds.sf100.web_sales
    )  
 UNION ALL (
       SELECT
         "cs_sold_date_sk" "sold_date_sk"
       , "cs_ext_sales_price" "sales_price"
       FROM
-        hive.tpcds_300gb_orc.catalog_sales
+        tpcds.sf100.catalog_sales
    ) ) 
 , wswscs AS (
    SELECT
@@ -31,7 +31,7 @@ UNION ALL (
    , "sum"((CASE WHEN ("d_day_name" = 'Saturday ') THEN "sales_price" ELSE null END)) "sat_sales"
    FROM
      wscs
-   , hive.tpcds_300gb_orc.date_dim
+   , tpcds.sf100.date_dim
    WHERE ("d_date_sk" = "sold_date_sk")
    GROUP BY "d_week_seq"
 ) 
@@ -57,7 +57,7 @@ FROM
    , "sat_sales" "sat_sales1"
    FROM
      wswscs
-   , hive.tpcds_300gb_orc.date_dim
+   , tpcds.sf100.date_dim
    WHERE ("date_dim"."d_week_seq" = "wswscs"."d_week_seq")
       AND ("d_year" = 2001)
 )  y
@@ -73,7 +73,7 @@ FROM
    , "sat_sales" "sat_sales2"
    FROM
      wswscs
-   , hive.tpcds_300gb_orc.date_dim
+   , tpcds.sf100.date_dim
    WHERE ("date_dim"."d_week_seq" = "wswscs"."d_week_seq")
       AND ("d_year" = (2001 + 1))
 )  z

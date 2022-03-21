@@ -2,8 +2,8 @@
 SELECT 
   sum(l.extendedprice* (1 - l.discount)) as revenue
 FROM 
-  "hive"."tpch_300gb_orc"."lineitem" l,
-  "hive"."tpch_300gb_orc"."part" p
+  tpcds.sf100.lineitem l,
+  tpcds.sf100.part p
 WHERE
   p.partkey = l.partkey
   AND

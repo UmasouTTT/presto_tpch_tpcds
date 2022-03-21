@@ -6,9 +6,9 @@ SELECT
 , (GROUPING ("s_state") + GROUPING ("s_county")) "lochierarchy"
 , "rank"() OVER (PARTITION BY (GROUPING ("s_state") + GROUPING ("s_county")), (CASE WHEN (GROUPING ("s_county") = 0) THEN "s_state" END) ORDER BY "sum"("ss_net_profit") DESC) "rank_within_parent"
 FROM
-  hive.tpcds_300gb_orc.store_sales
-, hive.tpcds_300gb_orc.date_dim d1
-, hive.tpcds_300gb_orc.store
+  tpcds.sf100.store_sales
+, tpcds.sf100.date_dim d1
+, tpcds.sf100.store
 WHERE ("d1"."d_month_seq" BETWEEN 1200 AND (1200 + 11))
    AND ("d1"."d_date_sk" = "ss_sold_date_sk")
    AND ("s_store_sk" = "ss_store_sk")
@@ -20,9 +20,9 @@ WHERE ("d1"."d_month_seq" BETWEEN 1200 AND (1200 + 11))
         "s_state" "s_state"
       , "rank"() OVER (PARTITION BY "s_state" ORDER BY "sum"("ss_net_profit") DESC) "ranking"
       FROM
-        hive.tpcds_300gb_orc.store_sales
-      , hive.tpcds_300gb_orc.store
-      , hive.tpcds_300gb_orc.date_dim
+        tpcds.sf100.store_sales
+      , tpcds.sf100.store
+      , tpcds.sf100.date_dim
       WHERE ("d_month_seq" BETWEEN 1200 AND (1200 + 11))
          AND ("d_date_sk" = "ss_sold_date_sk")
          AND ("s_store_sk" = "ss_store_sk")

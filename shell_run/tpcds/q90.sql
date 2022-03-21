@@ -4,10 +4,10 @@ FROM
   (
    SELECT "count"(*) "amc"
    FROM
-     hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.web_page
+     tpcds.sf100.web_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.web_page
    WHERE ("ws_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ws_ship_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ws_web_page_sk" = "web_page"."wp_web_page_sk")
@@ -18,10 +18,10 @@ FROM
 , (
    SELECT "count"(*) "pmc"
    FROM
-     hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.household_demographics
-   , hive.tpcds_300gb_orc.time_dim
-   , hive.tpcds_300gb_orc.web_page
+     tpcds.sf100.web_sales
+   , tpcds.sf100.household_demographics
+   , tpcds.sf100.time_dim
+   , tpcds.sf100.web_page
    WHERE ("ws_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ws_ship_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ws_web_page_sk" = "web_page"."wp_web_page_sk")

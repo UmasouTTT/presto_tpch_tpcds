@@ -7,10 +7,10 @@ FROM
    , "sum"("ss_sales_price") "sum_sales"
    , "avg"("sum"("ss_sales_price")) OVER (PARTITION BY "i_manufact_id") "avg_quarterly_sales"
    FROM
-     hive.tpcds_300gb_orc.item
-   , hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.item
+   , tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.store
    WHERE ("ss_item_sk" = "i_item_sk")
       AND ("ss_sold_date_sk" = "d_date_sk")
       AND ("ss_store_sk" = "s_store_sk")

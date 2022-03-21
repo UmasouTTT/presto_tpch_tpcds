@@ -5,8 +5,8 @@ SELECT
   p.size,
   count(DISTINCT ps.suppkey) AS supplier_cnt
 FROM
-  "hive"."tpch_300gb_orc"."partsupp" AS ps,
-  "hive"."tpch_300gb_orc"."part" AS p
+  tpcds.sf100.partsupp AS ps,
+  tpcds.sf100.part AS p
 WHERE
   p.partkey = ps.partkey
   AND p.brand <> 'Brand#45'
@@ -15,7 +15,7 @@ WHERE
   AND ps.suppkey NOT IN (
     SELECT s.suppkey
     FROM
-      "hive"."tpch_300gb_orc"."supplier" AS s
+      tpcds.sf100.supplier AS s
     WHERE
       s.comment LIKE '%Customer%Complaints%'
   )

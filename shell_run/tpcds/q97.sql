@@ -5,8 +5,8 @@ WITH
      "ss_customer_sk" "customer_sk"
    , "ss_item_sk" "item_sk"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
    WHERE ("ss_sold_date_sk" = "d_date_sk")
       AND ("d_month_seq" BETWEEN 1200 AND (1200 + 11))
    GROUP BY "ss_customer_sk", "ss_item_sk"
@@ -16,8 +16,8 @@ WITH
      "cs_bill_customer_sk" "customer_sk"
    , "cs_item_sk" "item_sk"
    FROM
-     hive.tpcds_300gb_orc.catalog_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.catalog_sales
+   , tpcds.sf100.date_dim
    WHERE ("cs_sold_date_sk" = "d_date_sk")
       AND ("d_month_seq" BETWEEN 1200 AND (1200 + 11))
    GROUP BY "cs_bill_customer_sk", "cs_item_sk"

@@ -8,14 +8,14 @@ SELECT
 , "sum"("sr_return_quantity") "store_returns_quantity"
 , "sum"("cs_quantity") "catalog_sales_quantity"
 FROM
-  hive.tpcds_300gb_orc.store_sales
-, hive.tpcds_300gb_orc.store_returns
-, hive.tpcds_300gb_orc.catalog_sales
-, hive.tpcds_300gb_orc.date_dim d1
-, hive.tpcds_300gb_orc.date_dim d2
-, hive.tpcds_300gb_orc.date_dim d3
-, hive.tpcds_300gb_orc.store
-, hive.tpcds_300gb_orc.item
+  tpcds.sf100.store_sales
+, tpcds.sf100.store_returns
+, tpcds.sf100.catalog_sales
+, tpcds.sf100.date_dim d1
+, tpcds.sf100.date_dim d2
+, tpcds.sf100.date_dim d3
+, tpcds.sf100.store
+, tpcds.sf100.item
 WHERE ("d1"."d_moy" = 9)
    AND ("d1"."d_year" = 1999)
    AND ("d1"."d_date_sk" = "ss_sold_date_sk")

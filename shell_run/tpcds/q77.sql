@@ -6,9 +6,9 @@ WITH
    , "sum"("ss_ext_sales_price") "sales"
    , "sum"("ss_net_profit") "profit"
    FROM
-     hive.tpcds_300gb_orc.store_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.store
    WHERE ("ss_sold_date_sk" = "d_date_sk")
       AND ("d_date" BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '30' DAY))
       AND ("ss_store_sk" = "s_store_sk")
@@ -20,9 +20,9 @@ WITH
    , "sum"("sr_return_amt") "returns"
    , "sum"("sr_net_loss") "profit_loss"
    FROM
-     hive.tpcds_300gb_orc.store_returns
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.store
+     tpcds.sf100.store_returns
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.store
    WHERE ("sr_returned_date_sk" = "d_date_sk")
       AND ("d_date" BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '30' DAY))
       AND ("sr_store_sk" = "s_store_sk")
@@ -34,8 +34,8 @@ WITH
    , "sum"("cs_ext_sales_price") "sales"
    , "sum"("cs_net_profit") "profit"
    FROM
-     hive.tpcds_300gb_orc.catalog_sales
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.catalog_sales
+   , tpcds.sf100.date_dim
    WHERE ("cs_sold_date_sk" = "d_date_sk")
       AND ("d_date" BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '30' DAY))
    GROUP BY "cs_call_center_sk"
@@ -46,8 +46,8 @@ WITH
    , "sum"("cr_return_amount") "returns"
    , "sum"("cr_net_loss") "profit_loss"
    FROM
-     hive.tpcds_300gb_orc.catalog_returns
-   , hive.tpcds_300gb_orc.date_dim
+     tpcds.sf100.catalog_returns
+   , tpcds.sf100.date_dim
    WHERE ("cr_returned_date_sk" = "d_date_sk")
       AND ("d_date" BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '30' DAY))
    GROUP BY "cr_call_center_sk"
@@ -58,9 +58,9 @@ WITH
    , "sum"("ws_ext_sales_price") "sales"
    , "sum"("ws_net_profit") "profit"
    FROM
-     hive.tpcds_300gb_orc.web_sales
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.web_page
+     tpcds.sf100.web_sales
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.web_page
    WHERE ("ws_sold_date_sk" = "d_date_sk")
       AND ("d_date" BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '30' DAY))
       AND ("ws_web_page_sk" = "wp_web_page_sk")
@@ -72,9 +72,9 @@ WITH
    , "sum"("wr_return_amt") "returns"
    , "sum"("wr_net_loss") "profit_loss"
    FROM
-     hive.tpcds_300gb_orc.web_returns
-   , hive.tpcds_300gb_orc.date_dim
-   , hive.tpcds_300gb_orc.web_page
+     tpcds.sf100.web_returns
+   , tpcds.sf100.date_dim
+   , tpcds.sf100.web_page
    WHERE ("wr_returned_date_sk" = "d_date_sk")
       AND ("d_date" BETWEEN CAST('2000-08-23' AS DATE) AND (CAST('2000-08-23' AS DATE) + INTERVAL  '30' DAY))
       AND ("wr_web_page_sk" = "wp_web_page_sk")
@@ -89,7 +89,7 @@ SELECT
 FROM
   (
    SELECT
-     'hive.tpcds_300gb_orc.store channel' "channel"
+     'tpcds.sf100.store channel' "channel"
    , "ss"."s_store_sk" "id"
    , "sales"
    , COALESCE("returns", 0) "returns"

@@ -7,14 +7,14 @@ SELECT
   o.totalprice,
   sum(l.quantity)
 FROM
-  "hive"."tpch_300gb_orc"."customer" AS c,
-  "hive"."tpch_300gb_orc"."orders" AS o,
-  "hive"."tpch_300gb_orc"."lineitem" AS l
+  tpcds.sf100.customer AS c,
+  tpcds.sf100.orders AS o,
+  tpcds.sf100.lineitem AS l
 WHERE
   o.orderkey IN (
     SELECT l.orderkey
     FROM
-      "hive"."tpch_300gb_orc"."lineitem" AS l
+      tpcds.sf100.lineitem AS l
     GROUP BY
       l.orderkey
     HAVING

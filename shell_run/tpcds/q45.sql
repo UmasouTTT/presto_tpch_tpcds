@@ -4,11 +4,11 @@ SELECT
 , "ca_city"
 , "sum"("ws_sales_price")
 FROM
-  hive.tpcds_300gb_orc.web_sales
-, hive.tpcds_300gb_orc.customer
-, hive.tpcds_300gb_orc.customer_address
-, hive.tpcds_300gb_orc.date_dim
-, hive.tpcds_300gb_orc.item
+  tpcds.sf100.web_sales
+, tpcds.sf100.customer
+, tpcds.sf100.customer_address
+, tpcds.sf100.date_dim
+, tpcds.sf100.item
 WHERE ("ws_bill_customer_sk" = "c_customer_sk")
    AND ("c_current_addr_sk" = "ca_address_sk")
    AND ("ws_item_sk" = "i_item_sk")
@@ -16,7 +16,7 @@ WHERE ("ws_bill_customer_sk" = "c_customer_sk")
       OR ("i_item_id" IN (
       SELECT "i_item_id"
       FROM
-        hive.tpcds_300gb_orc.item
+        tpcds.sf100.item
       WHERE ("i_item_sk" IN (2      , 3      , 5      , 7      , 11      , 13      , 17      , 19      , 23      , 29))
    )))
    AND ("ws_sold_date_sk" = "d_date_sk")
