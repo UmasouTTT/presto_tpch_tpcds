@@ -11,7 +11,7 @@ my $SCRIPT_PATH = dirname( __FILE__ );
 chdir $SCRIPT_PATH;
 chdir 'tpch';
 my @queries = glob '*.sql';
-open(log, ">tpcds.log") or die "can not open tpcds.log";
+open(log, ">tpch.log") or die "can not open tpch.log";
 
 for my $query ( @queries ) {
 	my $warn_logfile = "$query.warn.log";

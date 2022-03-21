@@ -11,6 +11,7 @@ my $SCRIPT_PATH = dirname( __FILE__ );
 chdir $SCRIPT_PATH;
 chdir 'tpcds';
 my @queries = glob '*.sql';
+open(log, ">tpcds.log") or die "can not open tpcds.log";
 
 for my $query ( @queries ) {
 	my $warn_logfile = "$query.warn.log";
@@ -22,6 +23,7 @@ for my $query ( @queries ) {
 
 	my $warmEnd = time();
 	my $warmTime = $warmEnd - $warmStart ;
+	print log "$query Warmed : $warmTime";
 	print "Warmed Query : $query In $warmTime secs\n"; 
 
 	print "Running Query : $query\n"; 
@@ -31,5 +33,8 @@ for my $query ( @queries ) {
 
 	my $runEnd = time();
 	my $runTime = $runEnd - $runStart ;
+	print log "$query Done :  $runTime";
 	print "$query Done in  $runTime secs\n"; 
 } # end for
+
+close log;
