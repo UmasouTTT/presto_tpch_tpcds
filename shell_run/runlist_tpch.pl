@@ -27,7 +27,7 @@ for my $query ( @queries ) {
 	my $warmEnd = time();
 	my $warmTime = $warmEnd - $warmStart ;
 	print "Warmed Query : $query In $warmTime secs\n";
-	print LOG "$query Warmed : $warmTime";
+	print LOG "$query Warmed : $warmTime\n";
 
 	print "Running Query : $query\n"; 
 	my $runStart = time();
@@ -37,7 +37,7 @@ for my $query ( @queries ) {
 	my $runEnd = time();
 	my $runTime = $runEnd - $runStart ;
 	print "$query Done in  $runTime secs\n";
-	print LOG "$query Done :  $runTime";
+	print LOG "$query Done :  $runTime\n";
 } # end for
 
 close LOG;
