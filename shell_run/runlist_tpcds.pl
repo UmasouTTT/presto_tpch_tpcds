@@ -3,6 +3,9 @@
 use strict;
 use warnings;
 use File::Basename;
+use File::Path;
+
+open(log, ">tpcds.log") or die "can not open tpcds.log";
 
 # GLOBALS
 my $SCRIPT_NAME = basename( __FILE__ );
@@ -11,7 +14,7 @@ my $SCRIPT_PATH = dirname( __FILE__ );
 chdir $SCRIPT_PATH;
 chdir 'tpcds';
 my @queries = glob '*.sql';
-open(log, ">tpcds.log") or die "can not open tpcds.log";
+
 
 for my $query ( @queries ) {
 	my $warn_logfile = "$query.warn.log";
