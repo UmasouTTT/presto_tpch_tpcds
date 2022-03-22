@@ -2,10 +2,10 @@
 
 schemas = [
     # (new_schema, source_schema)
-#    ('tpcds-10', 'tpcds.sf10'),
-#    ('tpcds-100', 'tpcds.sf100'),
-    ('tpcds-100', 'tpcds.sf300'),
-#    ('tpcds-1000', 'tpcds.sf1000'),
+#    ('tpcds_10', 'tpcds.sf10'),
+    ('tpcd_100', 'tpcds.sf100'),
+#    ('tpcd_300', 'tpcds.sf300'),
+#    ('tpcds_1000', 'tpcds.sf1000'),
 ]
 
 tables = [
@@ -47,4 +47,4 @@ for (new_schema, source_schema) in schemas:
     print("CREATE SCHEMA hive.%s;" % (new_schema,))
     for table in tables:
         print('CREATE TABLE hive.%s.%s WITH (external_location="s3://%s/%s", "format = \'%s\") AS SELECT * FROM %s."%s";' % \
-              (new_schema, table, new_schema,table, format, source_schema, table))
+              (new_schema, table, new_schema.replace("_", "-"), table, format, source_schema, table))
