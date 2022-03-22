@@ -15,10 +15,11 @@ chdir $SCRIPT_PATH;
 chdir 'tpch';
 my @queries = glob '*.sql';
 
-my $warn_logfile = "$query.warn.log";
-my $logname = "$query.log";
+
 # warm
 for my $query ( @queries ) {
+    my $warn_logfile = "$query.warn.log";
+    my $logname = "$query.log";
 
 	print "Warming Query : $query\n"; 
 	my $warmStart = time();
@@ -34,6 +35,8 @@ for my $query ( @queries ) {
 
 # turn 1
 for my $query ( @queries ) {
+    my $warn_logfile = "$query.warn.log";
+    my $logname = "$query.log";
 	print "Running Query : $query\n";
 	my $runStart = time();
 	my $cmd2="(/home/ec2-user/trino/trino/bin/trino --server localhost:8001 --catalog hive -f ./$query) | tee  ../tpch_logs/$logname > /dev/null";
@@ -48,6 +51,8 @@ for my $query ( @queries ) {
 
 # turn 2
 for my $query ( @queries ) {
+    my $warn_logfile = "$query.warn.log";
+    my $logname = "$query.log";
     # turn 1
 	print "Running Query : $query\n";
 	my $runStart = time();

@@ -15,12 +15,12 @@ chdir $SCRIPT_PATH;
 chdir 'tpcds';
 my @queries = glob '*.sql';
 
-my $warn_logfile = "$query.warn.log";
-my $logname = "$query.log";
+
 
 # warm
 for my $query ( @queries ) {
-
+    my $warn_logfile = "$query.warn.log";
+    my $logname = "$query.log";
 	print "Warming Query : $query\n"; 
 	my $warmStart = time();
 	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$warn_logfile > /dev/null";
@@ -35,7 +35,8 @@ for my $query ( @queries ) {
 
 # run 1
 for my $query ( @queries ) {
-
+    my $warn_logfile = "$query.warn.log";
+    my $logname = "$query.log";
 	print "Running Query : $query\n";
 	my $runStart = time();
 	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
@@ -50,7 +51,8 @@ for my $query ( @queries ) {
 
 # run 2
 for my $query ( @queries ) {
-
+    my $warn_logfile = "$query.warn.log";
+    my $logname = "$query.log";
 	print "Running Query : $query\n";
 	my $runStart = time();
 	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
