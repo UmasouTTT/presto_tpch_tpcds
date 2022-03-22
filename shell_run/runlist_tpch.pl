@@ -23,7 +23,7 @@ for my $query ( @queries ) {
 
 	print "Warming Query : $query\n"; 
 	my $warmStart = time();
-	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8001 --catalog hive -f ./$query) | tee  ../tpch_logs/$warn_logfile > /dev/null";
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query) | tee  ../tpch_logs/$warn_logfile > /dev/null";
 	my @warnoutput=`$cmd`;
 
 	my $warmEnd = time();
@@ -39,7 +39,7 @@ for my $query ( @queries ) {
 #    my $logname = "$query.log";
 #	print "Running Query : $query\n";
 #	my $runStart = time();
-#	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8001 --catalog hive -f ./$query) | tee  ../tpch_logs/$logname > /dev/null";
+#	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query) | tee  ../tpch_logs/$logname > /dev/null";
 #	my @runoutput=`$cmd2`;
 #
 #	my $runEnd = time();
@@ -56,7 +56,7 @@ for my $query ( @queries ) {
 #    # turn 1
 #	print "Running Query : $query\n";
 #	my $runStart = time();
-#	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8001 --catalog hive -f ./$query) | tee  ../tpch_logs/$logname > /dev/null";
+#	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query) | tee  ../tpch_logs/$logname > /dev/null";
 #	my @runoutput=`$cmd2`;
 #
 #	my $runEnd = time();
