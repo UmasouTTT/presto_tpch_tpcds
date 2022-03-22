@@ -15,10 +15,11 @@ chdir $SCRIPT_PATH;
 chdir 'tpch';
 my @queries = glob '*.sql';
 
-
+my $warn_logfile = "$query.warn.log";
+my $logname = "$query.log";
+# warm
 for my $query ( @queries ) {
-	my $warn_logfile = "$query.warn.log";
-	my $logname = "$query.log";
+
 	print "Warming Query : $query\n"; 
 	my $warmStart = time();
 	my $cmd="(/home/ec2-user/trino/trino/bin/trino --server localhost:8001 --catalog hive -f ./$query) | tee  ../tpch_logs/$warn_logfile > /dev/null";
@@ -27,9 +28,13 @@ for my $query ( @queries ) {
 	my $warmEnd = time();
 	my $warmTime = $warmEnd - $warmStart ;
 	print "Warmed Query : $query In $warmTime secs\n";
-	print LOG "$query Warmed : $warmTime\n";
+	print LOG "$query,0 : $warmTime\n";
 
-	print "Running Query : $query\n"; 
+} # end for
+
+# turn 1
+for my $query ( @queries ) {
+	print "Running Query : $query\n";
 	my $runStart = time();
 	my $cmd2="(/home/ec2-user/trino/trino/bin/trino --server localhost:8001 --catalog hive -f ./$query) | tee  ../tpch_logs/$logname > /dev/null";
 	my @runoutput=`$cmd2`;
@@ -37,7 +42,23 @@ for my $query ( @queries ) {
 	my $runEnd = time();
 	my $runTime = $runEnd - $runStart ;
 	print "$query Done in  $runTime secs\n";
-	print LOG "$query Done :  $runTime\n";
+	print LOG "$query,1:  $runTime\n";
+
+} # end for
+
+# turn 2
+for my $query ( @queries ) {
+    # turn 1
+	print "Running Query : $query\n";
+	my $runStart = time();
+	my $cmd2="(/home/ec2-user/trino/trino/bin/trino --server localhost:8001 --catalog hive -f ./$query) | tee  ../tpch_logs/$logname > /dev/null";
+	my @runoutput=`$cmd2`;
+
+	my $runEnd = time();
+	my $runTime = $runEnd - $runStart ;
+	print "$query Done in  $runTime secs\n";
+	print LOG "$query,2:  $runTime\n";
+
 } # end for
 
 close LOG;
