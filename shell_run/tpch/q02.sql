@@ -26,10 +26,10 @@ WHERE
     SELECT
       min(ps.supplycost)
     FROM
-      hive.tpch_100"partsupp" ps,
-      hive.tpch_100"supplier" s,
-      hive.tpch_100"nation" n,
-      hive.tpch_100"region" r
+      hive.tpch_100.partsupp ps,
+      hive.tpch_100.supplier s,
+      hive.tpch_100.nation n,
+      hive.tpch_100.region r
     WHERE
       p.partkey = ps.partkey
       AND s.suppkey = ps.suppkey

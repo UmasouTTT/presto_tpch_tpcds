@@ -12,7 +12,7 @@ WHERE
     SELECT 
       0.2*avg(l.quantity) 
     FROM 
-      hive.tpch_100"lineitem" l
+      hive.tpch_100.lineitem l
     WHERE 
     l.partkey = p.partkey
   )

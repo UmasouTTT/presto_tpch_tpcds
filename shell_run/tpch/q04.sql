@@ -11,7 +11,7 @@ WHERE
     SELECT 
       * 
     FROM 
-      hive.tpch_100"lineitem" l
+      hive.tpch_100.lineitem l
     WHERE 
       l.orderkey = o.orderkey 
       AND l.commitdate < l.receiptdate
