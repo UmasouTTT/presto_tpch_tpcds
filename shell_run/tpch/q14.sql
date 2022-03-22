@@ -5,8 +5,8 @@ SELECT 100.00 * sum(CASE
                     ELSE 0
                     END) / sum(l.extendedprice * (1 - l.discount)) AS promo_revenue
 FROM
-  hive.tpch_1000.lineitem AS l,
-  hive.tpch_1000.part AS p
+  hive.tpch_300.lineitem AS l,
+  hive.tpch_300.part AS p
 WHERE
   l.partkey = p.partkey
   AND l.shipdate >= DATE '1995-09-01'

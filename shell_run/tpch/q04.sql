@@ -3,7 +3,7 @@ SELECT
   o.orderpriority, 
   count(*) AS order_count 
 FROM 
-  hive.tpch_1000.orders o
+  hive.tpch_300.orders o
 WHERE  
   o.orderdate >= DATE '1993-07-01'
   AND o.orderdate < DATE '1993-07-01' + INTERVAL '3' MONTH
@@ -11,7 +11,7 @@ WHERE
     SELECT 
       * 
     FROM 
-      hive.tpch_1000.lineitem l
+      hive.tpch_300.lineitem l
     WHERE 
       l.orderkey = o.orderkey 
       AND l.commitdate < l.receiptdate

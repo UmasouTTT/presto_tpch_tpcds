@@ -9,11 +9,11 @@ SELECT
   s.phone,
   s.comment
 FROM
-  hive.tpch_1000.part p,
-  hive.tpch_1000.supplier s,
-  hive.tpch_1000.partsupp ps,
-  hive.tpch_1000.nation n,
-  hive.tpch_1000.region r
+  hive.tpch_300.part p,
+  hive.tpch_300.supplier s,
+  hive.tpch_300.partsupp ps,
+  hive.tpch_300.nation n,
+  hive.tpch_300.region r
 WHERE
   p.partkey = ps.partkey
   AND s.suppkey = ps.suppkey
@@ -26,10 +26,10 @@ WHERE
     SELECT
       min(ps.supplycost)
     FROM
-      hive.tpch_1000.partsupp ps,
-      hive.tpch_1000.supplier s,
-      hive.tpch_1000.nation n,
-      hive.tpch_1000.region r
+      hive.tpch_300.partsupp ps,
+      hive.tpch_300.supplier s,
+      hive.tpch_300.nation n,
+      hive.tpch_300.region r
     WHERE
       p.partkey = ps.partkey
       AND s.suppkey = ps.suppkey
