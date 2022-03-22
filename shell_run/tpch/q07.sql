@@ -11,12 +11,12 @@ FROM (
          extract(YEAR FROM l.shipdate)      AS l_year,
          l.extendedprice * (1 - l.discount) AS volume
        FROM
-         hive.tpch_300.supplier AS s,
-         hive.tpch_300.lineitem AS l,
-         hive.tpch_300.orders AS o,
-         hive.tpch_300.customer AS c,
-         hive.tpch_300.nation AS n1,
-         hive.tpch_300.nation AS n2
+         varada.tpch_300.supplier AS s,
+         varada.tpch_300.lineitem AS l,
+         varada.tpch_300.orders AS o,
+         varada.tpch_300.customer AS c,
+         varada.tpch_300.nation AS n1,
+         varada.tpch_300.nation AS n2
        WHERE
          s.suppkey = l.suppkey
          AND o.orderkey = l.orderkey
