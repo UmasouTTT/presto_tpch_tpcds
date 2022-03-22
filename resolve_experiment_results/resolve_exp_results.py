@@ -27,16 +27,42 @@ def resolve_results(log_paths):
             sec = int(content[1])
             exp = content[0]
             query = exp.split(",")[0]
-            time = exp.split(",")[1]
-
+            time = exp.split(",")[1].strip()
             if time not in results[connector]:
                 results[connector][time] = {}
-
             if query not in results[connector][time]:
                 results[connector][time][query.split(".")[0]] = sec
         f.close()
 
     return results
+
+def analysis(results, exps):
+    # analysis
+    print("compare hive with varada ...")
+    # warm
+    avg_0 = 0
+    max_0 = 0
+    for exp in exps:
+        avg_0 += (results["hive"]["0"][exp] - results["varada"]["0"][exp]) / results["hive"]["0"][exp]
+        max_0 = max(max_0, (results["hive"]["0"][exp] - results["varada"]["0"][exp]) / results["hive"]["0"][exp])
+    avg_0 /= len(exps)
+    print("round 0 : avg increase : {}, max increase : {}".format(avg_0, max_0))
+    # 1
+    avg_1 = 0
+    max_1 = 0
+    for exp in exps:
+        avg_1 += (results["hive"]["0"][exp] - results["varada"]["1"][exp]) / results["hive"]["0"][exp]
+        max_1 = max(max_1, (results["hive"]["0"][exp] - results["varada"]["1"][exp]) / results["hive"]["0"][exp])
+    avg_1 /= len(exps)
+    print("round 1 : avg increase : {}, max increase : {}".format(avg_1, max_1))
+    # 2
+    avg_2 = 0
+    max_2 = 0
+    for exp in exps:
+        avg_2 += (results["hive"]["0"][exp] - results["varada"]["2"][exp]) / results["hive"]["0"][exp]
+        max_2 = max(max_2, (results["hive"]["0"][exp] - results["varada"]["2"][exp]) / results["hive"]["0"][exp])
+    avg_2 /= len(exps)
+    print("round 2 : avg increase : {}, max increase : {}".format(avg_2, max_2))
 
 def draw_pic():
     # pic config
@@ -48,6 +74,8 @@ def draw_pic():
     results = resolve_results(logs)
 
     exps = ["q" + str(i) for i in range(1, 3)]
+
+    analysis(results, exps)
     # get y
     ys = []
     for connector in results:
