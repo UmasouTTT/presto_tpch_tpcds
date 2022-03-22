@@ -33,35 +33,35 @@ for my $query ( @queries ) {
 
 } # end for
 
-# run 1
-for my $query ( @queries ) {
-    my $warn_logfile = "$query.warn.log";
-    my $logname = "$query.log";
-	print "Running Query : $query\n";
-	my $runStart = time();
-	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
-	my @runoutput=`$cmd2`;
-
-	my $runEnd = time();
-	my $runTime = $runEnd - $runStart ;
-	print LOG "$query,1 :  $runTime\n";
-	print "$query Done in  $runTime secs\n";
-
-} # end for
-
-# run 2
-for my $query ( @queries ) {
-    my $warn_logfile = "$query.warn.log";
-    my $logname = "$query.log";
-	print "Running Query : $query\n";
-	my $runStart = time();
-	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
-	my @runoutput=`$cmd2`;
-
-	my $runEnd = time();
-	my $runTime = $runEnd - $runStart ;
-	print LOG "$query,2 :  $runTime\n";
-	print "$query Done in  $runTime secs\n";
-} # end for
+## run 1
+#for my $query ( @queries ) {
+#    my $warn_logfile = "$query.warn.log";
+#    my $logname = "$query.log";
+#	print "Running Query : $query\n";
+#	my $runStart = time();
+#	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
+#	my @runoutput=`$cmd2`;
+#
+#	my $runEnd = time();
+#	my $runTime = $runEnd - $runStart ;
+#	print LOG "$query,1 :  $runTime\n";
+#	print "$query Done in  $runTime secs\n";
+#
+#} # end for
+#
+## run 2
+#for my $query ( @queries ) {
+#    my $warn_logfile = "$query.warn.log";
+#    my $logname = "$query.log";
+#	print "Running Query : $query\n";
+#	my $runStart = time();
+#	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
+#	my @runoutput=`$cmd2`;
+#
+#	my $runEnd = time();
+#	my $runTime = $runEnd - $runStart ;
+#	print LOG "$query,2 :  $runTime\n";
+#	print "$query Done in  $runTime secs\n";
+#} # end for
 
 close LOG;
