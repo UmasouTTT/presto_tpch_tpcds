@@ -2,10 +2,10 @@
 
 schemas = [
     # (new_schema, source_schema)
-#    ('tpcds_10gb_orc', 'tpcds.sf10'),
-#    ('tpcds_100gb_orc', 'tpcds.sf100'),
-    ('tpcds_300gb_orc', 'tpcds.sf300'),
-#    ('tpcds_1tb_orc', 'tpcds.sf1000'),
+#    ('tpcds-10', 'tpcds.sf10'),
+#    ('tpcds-100', 'tpcds.sf100'),
+    ('tpcds-100', 'tpcds.sf300'),
+#    ('tpcds-1000', 'tpcds.sf1000'),
 ]
 
 tables = [
@@ -36,15 +36,15 @@ tables = [
 ]
 
 for (new_schema, source_schema) in schemas:
+    format = 'ORC'
+    # if new_schema.endswith('_orc'):
+    #     format = 'ORC'
+    # elif new_schema.endswith('_text'):
+    #     format = 'TEXTFILE'
+    # else:
+    #     raise ValueError(new_schema)
 
-    if new_schema.endswith('_orc'):
-        format = 'ORC'
-    elif new_schema.endswith('_text'):
-        format = 'TEXTFILE'
-    else:
-        raise ValueError(new_schema)
-
-    print （'CREATE SCHEMA hive.%s;' % (new_schema,)
+    print("CREATE SCHEMA hive.%s;" % (new_schema,))
     for table in tables:
-        print 'CREATE TABLE "hive"."%s"."%s" WITH (format = \'%s\') AS SELECT * FROM %s."%s";' % \
-              (new_schema, table, format, source_schema, table)
+        print('CREATE TABLE hive.%s.%s WITH (external_location="s3://%s/%s", "format = \'%s\") AS SELECT * FROM %s."%s";' % \
+              (new_schema, table, new_schema,table, format, source_schema, table))
