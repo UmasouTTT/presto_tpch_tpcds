@@ -9,12 +9,12 @@ FROM (
          extract(YEAR FROM o.orderdate)                                  AS o_year,
          l.extendedprice * (1 - l.discount) - ps.supplycost * l.quantity AS amount
        FROM
-         hive.tpch_100.part AS p,
-         hive.tpch_100.supplier AS s,
-         hive.tpch_100.lineitem AS l,
-         hive.tpch_100.partsupp AS ps,
-         hive.tpch_100.orders AS o,
-         hive.tpch_100.nation AS n
+         hive.tpch_1000.part AS p,
+         hive.tpch_1000.supplier AS s,
+         hive.tpch_1000.lineitem AS l,
+         hive.tpch_1000.partsupp AS ps,
+         hive.tpch_1000.orders AS o,
+         hive.tpch_1000.nation AS n
        WHERE
          s.suppkey = l.suppkey
          AND ps.suppkey = l.suppkey

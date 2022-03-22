@@ -14,8 +14,8 @@ SELECT
       ELSE 0
       END) AS low_line_count
 FROM
-  hive.tpch_100.orders AS o,
-  hive.tpch_100.lineitem AS l
+  hive.tpch_1000.orders AS o,
+  hive.tpch_1000.lineitem AS l
 WHERE
   o.orderkey = l.orderkey
   AND l.shipmode IN ('MAIL', 'SHIP')

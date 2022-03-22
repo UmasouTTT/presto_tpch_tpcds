@@ -2,7 +2,7 @@
 SELECT 
   sum(l.extendedprice*l.discount) AS revenue
 FROM 
-  hive.tpch_100.lineitem AS l
+  hive.tpch_1000.lineitem AS l
 WHERE 
   l.shipdate >= DATE '1994-01-01'
   AND l.shipdate < DATE '1994-01-01' + INTERVAL '1' YEAR

@@ -5,9 +5,9 @@ SELECT
   o.orderdate,
   o.shippriority
 FROM
-  hive.tpch_100.customer AS c,
-  hive.tpch_100.orders AS o,
-  hive.tpch_100.lineitem AS l
+  hive.tpch_1000.customer AS c,
+  hive.tpch_1000.orders AS o,
+  hive.tpch_1000.lineitem AS l
 WHERE
   c.mktsegment = 'BUILDING'
   AND c.custkey = o.custkey
