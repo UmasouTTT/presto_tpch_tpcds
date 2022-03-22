@@ -46,5 +46,5 @@ for (new_schema, source_schema) in schemas:
 
     print("CREATE SCHEMA hive.%s;" % (new_schema,))
     for table in tables:
-        print('CREATE TABLE hive.%s.%s WITH (external_location="s3://%s/%s", "format = \'%s\") AS SELECT * FROM %s."%s";' % \
+        print("CREATE TABLE hive.%s.%s WITH (external_location='s3://%s/%s', 'format = %s') AS SELECT * FROM %s.%s;" % \
               (new_schema, table, new_schema.replace("_", "-"), table, format, source_schema, table))
