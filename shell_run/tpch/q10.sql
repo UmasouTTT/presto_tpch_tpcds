@@ -9,10 +9,10 @@ SELECT
   c.phone,
   c.comment
 FROM
-  tpcds.sf100.lineitem AS l,
-  tpcds.sf100.orders AS o,
-  tpcds.sf100.customer AS c,
-  tpcds.sf100.nation AS n
+  hive.tpch_100.lineitem AS l,
+  hive.tpch_100.orders AS o,
+  hive.tpch_100.customer AS c,
+  hive.tpch_100.nation AS n
 WHERE
   c.custkey = o.custkey
   AND l.orderkey = o.orderkey

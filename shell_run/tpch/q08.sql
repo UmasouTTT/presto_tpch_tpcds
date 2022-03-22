@@ -12,14 +12,14 @@ FROM (
          l.extendedprice * (1 - l.discount) AS volume,
          n2.name                          AS nation
        FROM
-         tpcds.sf100.part AS p,
-         tpcds.sf100.supplier AS s,
-         tpcds.sf100.lineitem AS l,
-         tpcds.sf100.orders AS o,
-         tpcds.sf100.customer AS c,
-         tpcds.sf100.nation AS n1,
-         tpcds.sf100.nation AS n2,
-         tpcds.sf100.region AS r
+         hive.tpch_100.part AS p,
+         hive.tpch_100.supplier AS s,
+         hive.tpch_100.lineitem AS l,
+         hive.tpch_100.orders AS o,
+         hive.tpch_100.customer AS c,
+         hive.tpch_100.nation AS n1,
+         hive.tpch_100.nation AS n2,
+         hive.tpch_100.region AS r
        WHERE
          p.partkey = l.partkey
          AND s.suppkey = l.suppkey

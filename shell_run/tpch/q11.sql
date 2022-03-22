@@ -3,9 +3,9 @@ SELECT
   ps.partkey, 
   sum(ps.supplycost*ps.availqty) AS value
 FROM 
-  tpcds.sf100.partsupp ps,
-  tpcds.sf100.supplier s,
-  tpcds.sf100.nation n
+  hive.tpch_100.partsupp ps,
+  hive.tpch_100.supplier s,
+  hive.tpch_100.nation n
 WHERE 
   ps.suppkey = s.suppkey 
   AND s.nationkey = n.nationkey 
@@ -17,9 +17,9 @@ HAVING
     SELECT 
       sum(ps.supplycost*ps.availqty) * 0.0001000000
     FROM 
-      tpcds.sf100"partsupp" ps,
-      tpcds.sf100"supplier" s,
-      tpcds.sf100"nation" n
+      hive.tpch_100"partsupp" ps,
+      hive.tpch_100"supplier" s,
+      hive.tpch_100"nation" n
     WHERE 
       ps.suppkey = s.suppkey 
       AND s.nationkey = n.nationkey 
