@@ -9,14 +9,14 @@ FROM
       substr(c.phone,1,2) AS cntrycode,
       c.acctbal
     FROM 
-      hive.tpch_300.customer c
+      varada.tpch_300.customer c
     WHERE 
       substr(c.phone,1,2) IN ('13', '31', '23', '29', '30', '18', '17')
       AND c.acctbal > (
         SELECT 
           avg(c.acctbal) 
         FROM 
-          hive.tpch_300.customer c
+          varada.tpch_300.customer c
         WHERE 
           c.acctbal > 0.00 
           AND substr(c.phone,1,2) IN ('13', '31', '23', '29', '30', '18', '17')
@@ -25,7 +25,7 @@ FROM
         SELECT 
           * 
         FROM 
-          hive.tpch_300.orders o
+          varada.tpch_300.orders o
         WHERE 
           o.custkey = c.custkey
       )

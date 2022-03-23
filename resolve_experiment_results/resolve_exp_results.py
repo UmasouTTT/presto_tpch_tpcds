@@ -18,7 +18,7 @@ def resolve_results(log_paths):
     # connector name
     results = {}
     for path in log_paths:
-        connector = path.split("/")[-1]
+        connector = path.split("/")[-1].split(".")[0]
         results[connector] = {}
         # results for each turn
         f = open(path, "r+", encoding="utf-8")
@@ -73,7 +73,13 @@ def draw_pic():
     logs = connector_logs()
     results = resolve_results(logs)
 
-    exps = ["q" + str(i) for i in range(1, 3)]
+    exps = []
+    for i in range(1, 23):
+        if i < 10:
+            exps.append("q0" + str(i))
+        else:
+            exps.append("q" + str(i))
+
 
     analysis(results, exps)
     # get y

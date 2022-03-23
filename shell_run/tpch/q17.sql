@@ -2,8 +2,8 @@
 SELECT 
   sum(l.extendedprice)/7.0 as avg_yearly 
 FROM 
-  hive.tpch_300.lineitem l,
-  hive.tpch_300.part p
+  varada.tpch_300.lineitem l,
+  varada.tpch_300.part p
 WHERE 
   p.partkey = l.partkey 
   AND p.brand = 'Brand#23' 
@@ -12,7 +12,7 @@ WHERE
     SELECT 
       0.2*avg(l.quantity) 
     FROM 
-      hive.tpch_300.lineitem l
+      varada.tpch_300.lineitem l
     WHERE 
     l.partkey = p.partkey
   )
