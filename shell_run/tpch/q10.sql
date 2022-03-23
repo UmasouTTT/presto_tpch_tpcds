@@ -9,10 +9,10 @@ SELECT
   c.phone,
   c.comment
 FROM
-  varada.tpch_300.lineitem AS l,
-  varada.tpch_300.orders AS o,
-  varada.tpch_300.customer AS c,
-  varada.tpch_300.nation AS n
+  hive.tpch_300.lineitem AS l,
+  hive.tpch_300.orders AS o,
+  hive.tpch_300.customer AS c,
+  hive.tpch_300.nation AS n
 WHERE
   c.custkey = o.custkey
   AND l.orderkey = o.orderkey

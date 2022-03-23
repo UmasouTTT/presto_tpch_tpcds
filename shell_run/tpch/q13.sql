@@ -7,9 +7,9 @@ FROM (
     c.custkey, 
     count(o.orderkey)
   FROM 
-    varada.tpch_300.customer c
+    hive.tpch_300.customer c
     LEFT OUTER JOIN
-    varada.tpch_300.orders o
+    hive.tpch_300.orders o
   ON 
     c.custkey = o.custkey
     AND o.comment NOT LIKE '%special%requests%'

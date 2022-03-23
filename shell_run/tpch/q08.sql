@@ -12,14 +12,14 @@ FROM (
          l.extendedprice * (1 - l.discount) AS volume,
          n2.name                          AS nation
        FROM
-         varada.tpch_300.part AS p,
-         varada.tpch_300.supplier AS s,
-         varada.tpch_300.lineitem AS l,
-         varada.tpch_300.orders AS o,
-         varada.tpch_300.customer AS c,
-         varada.tpch_300.nation AS n1,
-         varada.tpch_300.nation AS n2,
-         varada.tpch_300.region AS r
+         hive.tpch_300.part AS p,
+         hive.tpch_300.supplier AS s,
+         hive.tpch_300.lineitem AS l,
+         hive.tpch_300.orders AS o,
+         hive.tpch_300.customer AS c,
+         hive.tpch_300.nation AS n1,
+         hive.tpch_300.nation AS n2,
+         hive.tpch_300.region AS r
        WHERE
          p.partkey = l.partkey
          AND s.suppkey = l.suppkey

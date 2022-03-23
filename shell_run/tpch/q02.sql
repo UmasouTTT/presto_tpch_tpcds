@@ -9,11 +9,11 @@ SELECT
   s.phone,
   s.comment
 FROM
-  varada.tpch_300.part p,
-  varada.tpch_300.supplier s,
-  varada.tpch_300.partsupp ps,
-  varada.tpch_300.nation n,
-  varada.tpch_300.region r
+  hive.tpch_300.part p,
+  hive.tpch_300.supplier s,
+  hive.tpch_300.partsupp ps,
+  hive.tpch_300.nation n,
+  hive.tpch_300.region r
 WHERE
   p.partkey = ps.partkey
   AND s.suppkey = ps.suppkey
@@ -26,10 +26,10 @@ WHERE
     SELECT
       min(ps.supplycost)
     FROM
-      varada.tpch_300.partsupp ps,
-      varada.tpch_300.supplier s,
-      varada.tpch_300.nation n,
-      varada.tpch_300.region r
+      hive.tpch_300.partsupp ps,
+      hive.tpch_300.supplier s,
+      hive.tpch_300.nation n,
+      hive.tpch_300.region r
     WHERE
       p.partkey = ps.partkey
       AND s.suppkey = ps.suppkey
