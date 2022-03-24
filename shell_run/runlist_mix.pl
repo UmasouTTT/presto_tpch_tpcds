@@ -20,8 +20,8 @@ chdir 'mix_varada';
 my @queries = glob '*.sql';
 
 # warm
-print "***************************************Varada Warm**************************************************\n"
-@queries = List::Util::shuffle @queries;
+print "***************************************Varada Warm**************************************************\n";
+@queries=List::Util::shuffle @queries;
 for my $query ( @queries ) {
     my $warn_logfile = "$query.warn.log";
     my $logname = "$query.log";
@@ -39,8 +39,8 @@ for my $query ( @queries ) {
 } # end for
 
 # turn one
-print "***************************************Varada Turn One**************************************************\n"
-@queries = List::Util::shuffle @queries;
+print "***************************************Varada Turn One**************************************************\n";
+@queries=List::Util::shuffle @queries;
 for my $query ( @queries ) {
     my $warn_logfile = "$query.warn.log";
     my $logname = "$query.log";
@@ -58,8 +58,8 @@ for my $query ( @queries ) {
 } # end for
 
 # turn two
-print "***************************************Varada Turn Two**************************************************\n"
-@queries = List::Util::shuffle @queries;
+print "***************************************Varada Turn Two**************************************************\n";
+@queries=List::Util::shuffle @queries;
 for my $query ( @queries ) {
     my $warn_logfile = "$query.warn.log";
     my $logname = "$query.log";
@@ -79,7 +79,7 @@ for my $query ( @queries ) {
 close VARADA_LOG;
 
 # test hive
-print "***************************************Hive Warm**************************************************\n"
+print "***************************************Hive Warm**************************************************\n";
 chdir $SCRIPT_PATH;
 chdir 'mix_hive';
 @queries = glob '*.sql';
