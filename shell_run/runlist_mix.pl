@@ -82,7 +82,7 @@ close VARADA_LOG;
 print "***************************************Hive Warm**************************************************\n"
 chdir $SCRIPT_PATH;
 chdir 'mix_hive';
-my @queries = glob '*.sql';
+@queries = glob '*.sql';
 @queries = List::Util::shuffle @queries;
 for my $query ( @queries ) {
     my $warn_logfile = "$query.warn.log";
