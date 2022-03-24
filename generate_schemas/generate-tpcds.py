@@ -3,8 +3,8 @@
 schemas = [
     # (new_schema, source_schema)
 #    ('tpcds_10', 'tpcds.sf10'),
-    ('tpcd_100', 'tpcds.sf100'),
-#    ('tpcd_300', 'tpcds.sf300'),
+#    ('tpcds_100', 'tpcds.sf100'),
+    ('tpcds_300', 'tpcds.sf300'),
 #    ('tpcds_1000', 'tpcds.sf1000'),
 ]
 
@@ -36,7 +36,7 @@ tables = [
 ]
 
 for (new_schema, source_schema) in schemas:
-    format = 'ORC'
+    format = 'parquet'
     # if new_schema.endswith('_orc'):
     #     format = 'ORC'
     # elif new_schema.endswith('_text'):

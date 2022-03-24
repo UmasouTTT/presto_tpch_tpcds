@@ -63,11 +63,19 @@ def analysis(results, exps):
         max_2 = max(max_2, (results["hive"]["0"][exp] - results["varada"]["2"][exp]) / results["hive"]["0"][exp])
     avg_2 /= len(exps)
     print("round 2 : avg increase : {}, max increase : {}".format(avg_2, max_2))
+    # 3
+    avg_3 = 0
+    max_3 = 0
+    for exp in exps:
+        avg_3 += (results["hive"]["0"][exp] - results["varada"]["3"][exp]) / results["hive"]["0"][exp]
+        max_3 = max(max_3, (results["hive"]["0"][exp] - results["varada"]["3"][exp]) / results["hive"]["0"][exp])
+    avg_3 /= len(exps)
+    print("round 3 : avg increase : {}, max increase : {}".format(avg_3, max_3))
 
 def draw_pic():
     # pic config
-    bar_width = 20
-    color = ["red", "dodgerblue", "orange", "grey"]
+    bar_width = 15
+    color = ["red", "dodgerblue", "orange", "grey", "green"]
 
     # draw
     logs = connector_logs()
@@ -75,6 +83,8 @@ def draw_pic():
 
     exps = []
     for i in range(1, 23):
+        if i == 21:
+            continue
         if i < 10:
             exps.append("q0" + str(i))
         else:
@@ -101,7 +111,10 @@ def draw_pic():
             xs[_].append(x[_])
 
     for _ in range(len(xs)):
-        plt.bar(xs[_], ys[_][1], width=bar_width, color=color[_], label=ys[_][0])
+        if "hive_0" == ys[_][0]:
+            plt.bar(xs[_], ys[_][1], width=bar_width, color=color[_], label="presto")
+        else:
+            plt.bar(xs[_], ys[_][1], width=bar_width, color=color[_], label=ys[_][0])
 
     # 刻度
     plt.xticks(x_ticks, exps, rotation=275)
@@ -118,7 +131,7 @@ def draw_pic():
     # 展示
     # plt.legend( ncol=3, frameon=False, bbox_to_anchor=(0, 1))
     # plt.legend('boxoff')
-    plt.legend(loc='upper center', ncol=4, frameon=False)
+    plt.legend(loc='upper center', ncol=5, frameon=False)
 
 
     plt.show()
