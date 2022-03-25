@@ -2,7 +2,7 @@ import os
 import copy
 import matplotlib.pyplot as plt
 
-file = "./tpch/"
+file = "./mix/"
 
 # connectors
 def connector_logs():
@@ -64,13 +64,26 @@ def analysis(results, exps):
     avg_2 /= len(exps)
     print("round 2 : avg increase : {}, max increase : {}".format(avg_2, max_2))
     # 3
-    avg_3 = 0
-    max_3 = 0
-    for exp in exps:
-        avg_3 += (results["hive"]["0"][exp] - results["varada"]["3"][exp]) / results["hive"]["0"][exp]
-        max_3 = max(max_3, (results["hive"]["0"][exp] - results["varada"]["3"][exp]) / results["hive"]["0"][exp])
-    avg_3 /= len(exps)
-    print("round 3 : avg increase : {}, max increase : {}".format(avg_3, max_3))
+    # avg_3 = 0
+    # max_3 = 0
+    # for exp in exps:
+    #     avg_3 += (results["hive"]["0"][exp] - results["varada"]["3"][exp]) / results["hive"]["0"][exp]
+    #     max_3 = max(max_3, (results["hive"]["0"][exp] - results["varada"]["3"][exp]) / results["hive"]["0"][exp])
+    # avg_3 /= len(exps)
+    # print("round 3 : avg increase : {}, max increase : {}".format(avg_3, max_3))
+
+def get_exps():
+    exps = []
+    for root, dirs, files in os.walk(file):
+        # 遍历文件
+        for f in files:
+            if "hive" in f:
+                _f = open(os.path.join(root, f), "r+", encoding="utf-8")
+                for line in _f:
+                    exps.append(line.strip().split(".")[0])
+                _f.close()
+
+    return exps
 
 def draw_pic():
     # pic config
@@ -81,14 +94,15 @@ def draw_pic():
     logs = connector_logs()
     results = resolve_results(logs)
 
-    exps = []
-    for i in range(1, 23):
-        if i == 21:
-            continue
-        if i < 10:
-            exps.append("q0" + str(i))
-        else:
-            exps.append("q" + str(i))
+    # exps = []
+    # for i in range(1, 23):
+    #     if i == 21:
+    #         continue
+    #     if i < 10:
+    #         exps.append("q0" + str(i))
+    #     else:
+    #         exps.append("q" + str(i))
+    exps = get_exps()
 
 
     analysis(results, exps)

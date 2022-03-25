@@ -2,7 +2,7 @@ import os
 import copy
 import matplotlib.pyplot as plt
 
-file = "./tpch/"
+file = "./mix/"
 
 # connectors
 def connector_logs():
