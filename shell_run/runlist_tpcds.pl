@@ -4,64 +4,88 @@ use strict;
 use warnings;
 use File::Basename;
 use File::Path;
+use List::Util;
 
-open(LOG, ">tpcds.log") or die "can not open tpcds.log";
+open(VARADA_LOG, ">varada_tpcds.log") or die "can not open varada.log";
+open(HIVE_LOG, ">hive_tpcds.log") or die "can not open hive.log";
 
 # GLOBALS
 my $SCRIPT_NAME = basename( __FILE__ );
 my $SCRIPT_PATH = dirname( __FILE__ );
 
+# test varada warm
+
 chdir $SCRIPT_PATH;
-chdir 'tpcds';
+chdir 'tpcds_varada';
 my @queries = glob '*.sql';
 
-
-
-# warm
+#
+## warm
+print "***************************************Varada Warm**************************************************\n";
 for my $query ( @queries ) {
-    my $warn_logfile = "$query.warn.log";
-    my $logname = "$query.log";
-	print "Warming Query : $query\n"; 
+	print "Warming Query : $query\n";
 	my $warmStart = time();
-	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$warn_logfile > /dev/null";
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
 	my @warnoutput=`$cmd`;
 
 	my $warmEnd = time();
 	my $warmTime = $warmEnd - $warmStart ;
-	print LOG "$query,0 : $warmTime\n";
-	print "Warmed Query : $query In $warmTime secs\n"; 
+	print "Warmed Query : $query In $warmTime secs\n";
+	print VARADA_LOG "$query,0 : $warmTime\n";
+
+} # end for
+#
+# turn one
+print "***************************************Varada Turn One**************************************************\n";
+for my $query ( @queries ) {
+
+	print "Turn one : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
+	my @warnoutput=`$cmd`;
+
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print VARADA_LOG "$query,1 : $warmTime\n";
+
+} # end for
+#
+# turn two
+print "***************************************Varada Turn Two**************************************************\n";
+for my $query ( @queries ) {
+
+	print "Warming Query : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
+	my @warnoutput=`$cmd`;
+
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print VARADA_LOG "$query,2 : $warmTime\n";
 
 } # end for
 
-## run 1
-#for my $query ( @queries ) {
-#    my $warn_logfile = "$query.warn.log";
-#    my $logname = "$query.log";
-#	print "Running Query : $query\n";
-#	my $runStart = time();
-#	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
-#	my @runoutput=`$cmd2`;
+close VARADA_LOG;
 #
-#	my $runEnd = time();
-#	my $runTime = $runEnd - $runStart ;
-#	print LOG "$query,1 :  $runTime\n";
-#	print "$query Done in  $runTime secs\n";
-#
-#} # end for
-#
-## run 2
-#for my $query ( @queries ) {
-#    my $warn_logfile = "$query.warn.log";
-#    my $logname = "$query.log";
-#	print "Running Query : $query\n";
-#	my $runStart = time();
-#	my $cmd2="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query) | tee  ../tpcds_logs/$logname > /dev/null";
-#	my @runoutput=`$cmd2`;
-#
-#	my $runEnd = time();
-#	my $runTime = $runEnd - $runStart ;
-#	print LOG "$query,2 :  $runTime\n";
-#	print "$query Done in  $runTime secs\n";
-#} # end for
+# test hive
+print "***************************************Hive Warm**************************************************\n";
+chdir '../';
+chdir 'tpcds_hive';
+my @queries = glob '*.sql';
+for my $query ( @queries ) {
 
-close LOG;
+	print "Warming Query : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query)";
+	my @warnoutput=`$cmd`;
+
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print HIVE_LOG "$query,0 : $warmTime\n";
+
+} # end for
+
+close HIVE_LOG;

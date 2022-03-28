@@ -4,8 +4,8 @@ schemas = [
     # (new_schema, source_schema)
 #    ('tpcds_10', 'tpcds.sf10'),
 #    ('tpcds_100', 'tpcds.sf100'),
-    ('tpcds_300', 'tpcds.sf300'),
-#    ('tpcds_1000', 'tpcds.sf1000'),
+#    ('tpcds_300', 'tpcds.sf300'),
+    ('tpcds_1000', 'tpcds.sf1000'),
 ]
 
 tables = [
@@ -36,7 +36,7 @@ tables = [
 ]
 
 for (new_schema, source_schema) in schemas:
-    format = 'parquet'
+    format = 'ORC'
     # if new_schema.endswith('_orc'):
     #     format = 'ORC'
     # elif new_schema.endswith('_text'):
@@ -46,5 +46,5 @@ for (new_schema, source_schema) in schemas:
 
     print("CREATE SCHEMA hive.%s;" % (new_schema,))
     for table in tables:
-        print("CREATE TABLE hive.%s.%s WITH (external_location='s3://%s/%s', 'format = %s') AS SELECT * FROM %s.%s;" % \
+        print("CREATE TABLE hive.%s.%s WITH (external_location='s3://ORC/%s/%s', 'format = %s') AS SELECT * FROM %s.%s;" % \
               (new_schema, table, new_schema.replace("_", "-"), table, format, source_schema, table))

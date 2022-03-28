@@ -1,6 +1,7 @@
 import os
 import copy
 import matplotlib.pyplot as plt
+import numpy as np
 
 file = "./mix/"
 
@@ -87,6 +88,7 @@ def get_exps():
 
 def draw_pic():
     # pic config
+    plt.figure(figsize=(13, 5))
     bar_width = 15
     color = ["red", "dodgerblue", "orange", "grey", "green"]
 
@@ -131,7 +133,14 @@ def draw_pic():
             plt.bar(xs[_], ys[_][1], width=bar_width, color=color[_], label=ys[_][0])
 
     # 刻度
-    plt.xticks(x_ticks, exps, rotation=275)
+
+    plt.xticks(x_ticks, exps, rotation=90)
+
+
+    # bins = np.linspace(-1, 1, 21)  # 横坐标起始和结束值，分割成21份
+    # plt.figure(figsize=(13, 5))  # 图像大小
+    # plt.xticks(bins)  # 设置x轴
+    # plt.xlim(-1, 1)  # x轴开始和结束位置
 
     ax = plt.axes()
     ax.spines['top'].set_visible(False)
