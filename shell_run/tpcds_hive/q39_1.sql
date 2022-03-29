@@ -18,10 +18,10 @@ WITH
       , "stddev_samp"("inv_quantity_on_hand") "stdev"
       , "avg"("inv_quantity_on_hand") "mean"
       FROM
-        hive.tpch_1000.inventory
-      , hive.tpch_1000.item
-      , hive.tpch_1000.warehouse
-      , hive.tpch_1000.date_dim
+        hive.tpcds_1000.inventory
+      , hive.tpcds_1000.item
+      , hive.tpcds_1000.warehouse
+      , hive.tpcds_1000.date_dim
       WHERE ("inv_item_sk" = "i_item_sk")
          AND ("inv_warehouse_sk" = "w_warehouse_sk")
          AND ("inv_date_sk" = "d_date_sk")

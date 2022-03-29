@@ -6,12 +6,12 @@ SELECT
 , "i_manufact"
 , "sum"("ss_ext_sales_price") "ext_price"
 FROM
-  varada.tpch_1000.date_dim
-, varada.tpch_1000.store_sales
-, varada.tpch_1000.item
-, varada.tpch_1000.customer
-, varada.tpch_1000.customer_address
-, varada.tpch_1000.store
+  varada.tpcds_1000.date_dim
+, varada.tpcds_1000.store_sales
+, varada.tpcds_1000.item
+, varada.tpcds_1000.customer
+, varada.tpcds_1000.customer_address
+, varada.tpcds_1000.store
 WHERE ("d_date_sk" = "ss_sold_date_sk")
    AND ("ss_item_sk" = "i_item_sk")
    AND ("i_manager_id" = 8)

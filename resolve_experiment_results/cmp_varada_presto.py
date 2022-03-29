@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 file = "./mix/"
+drop_queries = []
 
 # connectors
 def connector_logs():
@@ -28,6 +29,8 @@ def resolve_results(log_paths):
             sec = int(content[1])
             exp = content[0]
             query = exp.split(",")[0]
+            if query in drop_queries:
+                continue
             time = exp.split(",")[1].strip()
             if time not in results[connector]:
                 results[connector][time] = {}
@@ -72,6 +75,15 @@ def analysis(results, exps):
     #     max_3 = max(max_3, (results["hive"]["0"][exp] - results["varada"]["3"][exp]) / results["hive"]["0"][exp])
     # avg_3 /= len(exps)
     # print("round 3 : avg increase : {}, max increase : {}".format(avg_3, max_3))
+    # whole time
+    for type in results:
+        print("Connector is {}".format(type))
+        for turn in results[type]:
+            print("Turn is {}".format(turn))
+            whole_time = 0
+            for exp in results[type][turn]:
+                whole_time += results[type][turn][exp]
+            print("Whole time is {}".format(whole_time))
 
 def get_exps():
     exps = []

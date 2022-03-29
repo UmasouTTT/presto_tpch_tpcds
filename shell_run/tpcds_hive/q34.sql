@@ -13,10 +13,10 @@ FROM
    , "ss_customer_sk"
    , "count"(*) "cnt"
    FROM
-     hive.tpch_1000.store_sales
-   , hive.tpch_1000.date_dim
-   , hive.tpch_1000.store
-   , hive.tpch_1000.household_demographics
+     hive.tpcds_1000.store_sales
+   , hive.tpcds_1000.date_dim
+   , hive.tpcds_1000.store
+   , hive.tpcds_1000.household_demographics
    WHERE ("store_sales"."ss_sold_date_sk" = "date_dim"."d_date_sk")
       AND ("store_sales"."ss_store_sk" = "store"."s_store_sk")
       AND ("store_sales"."ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
@@ -30,7 +30,7 @@ FROM
       AND ("store"."s_county" IN ('Williamson County'   , 'Williamson County'   , 'Williamson County'   , 'Williamson County'   , 'Williamson County'   , 'Williamson County'   , 'Williamson County'   , 'Williamson County'))
    GROUP BY "ss_ticket_number", "ss_customer_sk"
 )  dn
-, hive.tpch_1000.customer
+, hive.tpcds_1000.customer
 WHERE ("ss_customer_sk" = "c_customer_sk")
    AND ("cnt" BETWEEN 15 AND 20)
 ORDER BY "c_last_name" ASC, "c_first_name" ASC, "c_salutation" ASC, "c_preferred_cust_flag" DESC, "ss_ticket_number" ASC

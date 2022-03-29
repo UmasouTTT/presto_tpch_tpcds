@@ -5,12 +5,12 @@ SELECT
 , "avg"("ss_ext_wholesale_cost")
 , "sum"("ss_ext_wholesale_cost")
 FROM
-  varada.tpch_1000.store_sales
-, varada.tpch_1000.store
-, varada.tpch_1000.customer_demographics
-, varada.tpch_1000.household_demographics
-, varada.tpch_1000.customer_address
-, varada.tpch_1000.date_dim
+  varada.tpcds_1000.store_sales
+, varada.tpcds_1000.store
+, varada.tpcds_1000.customer_demographics
+, varada.tpcds_1000.household_demographics
+, varada.tpcds_1000.customer_address
+, varada.tpcds_1000.date_dim
 WHERE ("s_store_sk" = "ss_store_sk")
    AND ("ss_sold_date_sk" = "d_date_sk")
    AND ("d_year" = 2001)

@@ -3,10 +3,10 @@ SELECT
   "ca_zip"
 , "sum"("cs_sales_price")
 FROM
-  hive.tpch_1000.catalog_sales
-, hive.tpch_1000.customer
-, hive.tpch_1000.customer_address
-, hive.tpch_1000.date_dim
+  hive.tpcds_1000.catalog_sales
+, hive.tpcds_1000.customer
+, hive.tpcds_1000.customer_address
+, hive.tpcds_1000.date_dim
 WHERE ("cs_bill_customer_sk" = "c_customer_sk")
    AND ("c_current_addr_sk" = "ca_address_sk")
    AND (("substr"("ca_zip", 1, 5) IN ('85669'   , '86197'   , '88274'   , '83405'   , '86475'   , '85392'   , '85460'   , '80348'   , '81792'))

@@ -13,10 +13,10 @@ FROM
    , "ss_customer_sk"
    , "count"(*) "cnt"
    FROM
-     varada.tpch_1000.store_sales
-   , varada.tpch_1000.date_dim
-   , varada.tpch_1000.store
-   , varada.tpch_1000.household_demographics
+     varada.tpcds_1000.store_sales
+   , varada.tpcds_1000.date_dim
+   , varada.tpcds_1000.store
+   , varada.tpcds_1000.household_demographics
    WHERE ("store_sales"."ss_sold_date_sk" = "date_dim"."d_date_sk")
       AND ("store_sales"."ss_store_sk" = "store"."s_store_sk")
       AND ("store_sales"."ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
@@ -29,7 +29,7 @@ FROM
       AND ("store"."s_county" IN ('Williamson County'   , 'Franklin Parish'   , 'Bronx County'   , 'Orange County'))
    GROUP BY "ss_ticket_number", "ss_customer_sk"
 )  dj
-, varada.tpch_1000.customer
+, varada.tpcds_1000.customer
 WHERE ("ss_customer_sk" = "c_customer_sk")
    AND ("cnt" BETWEEN 1 AND 5)
 ORDER BY "cnt" DESC, "c_last_name" ASC;

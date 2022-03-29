@@ -12,11 +12,11 @@ SELECT
    AND (("cs_ship_date_sk" - "cs_sold_date_sk") <= 120) THEN 1 ELSE 0 END)) "91-120 days"
 , "sum"((CASE WHEN (("cs_ship_date_sk" - "cs_sold_date_sk") > 120) THEN 1 ELSE 0 END)) ">120 days"
 FROM
-  hive.tpch_1000.catalog_sales
-, hive.tpch_1000.warehouse
-, hive.tpch_1000.ship_mode
-, hive.tpch_1000.call_center
-, hive.tpch_1000.date_dim
+  hive.tpcds_1000.catalog_sales
+, hive.tpcds_1000.warehouse
+, hive.tpcds_1000.ship_mode
+, hive.tpcds_1000.call_center
+, hive.tpcds_1000.date_dim
 WHERE ("d_month_seq" BETWEEN 1200 AND (1200 + 11))
    AND ("cs_ship_date_sk" = "d_date_sk")
    AND ("cs_warehouse_sk" = "w_warehouse_sk")

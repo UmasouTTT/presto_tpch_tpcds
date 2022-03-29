@@ -5,13 +5,13 @@ SELECT
 , "cc_manager" "Manager"
 , "sum"("cr_net_loss") "Returns_Loss"
 FROM
-  hive.tpch_1000.call_center
-, hive.tpch_1000.catalog_returns
-, hive.tpch_1000.date_dim
-, hive.tpch_1000.customer
-, hive.tpch_1000.customer_address
-, hive.tpch_1000.customer_demographics
-, hive.tpch_1000.household_demographics
+  hive.tpcds_1000.call_center
+, hive.tpcds_1000.catalog_returns
+, hive.tpcds_1000.date_dim
+, hive.tpcds_1000.customer
+, hive.tpcds_1000.customer_address
+, hive.tpcds_1000.customer_demographics
+, hive.tpcds_1000.household_demographics
 WHERE ("cr_call_center_sk" = "cc_call_center_sk")
    AND ("cr_returned_date_sk" = "d_date_sk")
    AND ("cr_returning_customer_sk" = "c_customer_sk")

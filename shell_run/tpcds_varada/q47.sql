@@ -12,10 +12,10 @@ WITH
    , "avg"("sum"("ss_sales_price")) OVER (PARTITION BY "i_category", "i_brand", "s_store_name", "s_company_name", "d_year") "avg_monthly_sales"
    , "rank"() OVER (PARTITION BY "i_category", "i_brand", "s_store_name", "s_company_name" ORDER BY "d_year" ASC, "d_moy" ASC) "rn"
    FROM
-     varada.tpch_1000.item
-   , varada.tpch_1000.store_sales
-   , varada.tpch_1000.date_dim
-   , varada.tpch_1000.store
+     varada.tpcds_1000.item
+   , varada.tpcds_1000.store_sales
+   , varada.tpcds_1000.date_dim
+   , varada.tpcds_1000.store
    WHERE ("ss_item_sk" = "i_item_sk")
       AND ("ss_sold_date_sk" = "d_date_sk")
       AND ("ss_store_sk" = "s_store_sk")

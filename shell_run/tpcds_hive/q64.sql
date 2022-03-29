@@ -6,8 +6,8 @@ WITH
    , "sum"("cs_ext_list_price") "sale"
    , "sum"((("cr_refunded_cash" + "cr_reversed_charge") + "cr_store_credit")) "refund"
    FROM
-     hive.tpch_1000.catalog_sales
-   , hive.tpch_1000.catalog_returns
+     hive.tpcds_1000.catalog_sales
+   , hive.tpcds_1000.catalog_returns
    WHERE ("cs_item_sk" = "cr_item_sk")
       AND ("cs_order_number" = "cr_order_number")
    GROUP BY "cs_item_sk"
@@ -35,24 +35,24 @@ WITH
    , "sum"("ss_list_price") "s2"
    , "sum"("ss_coupon_amt") "s3"
    FROM
-     hive.tpch_1000.store_sales
-   , hive.tpch_1000.store_returns
+     hive.tpcds_1000.store_sales
+   , hive.tpcds_1000.store_returns
    , cs_ui
-   , hive.tpch_1000.date_dim d1
-   , hive.tpch_1000.date_dim d2
-   , hive.tpch_1000.date_dim d3
-   , hive.tpch_1000.store
-   , hive.tpch_1000.customer
-   , hive.tpch_1000.customer_demographics cd1
-   , hive.tpch_1000.customer_demographics cd2
-   , hive.tpch_1000.promotion
-   , hive.tpch_1000.household_demographics hd1
-   , hive.tpch_1000.household_demographics hd2
-   , hive.tpch_1000.customer_address ad1
-   , hive.tpch_1000.customer_address ad2
-   , hive.tpch_1000.income_band ib1
-   , hive.tpch_1000.income_band ib2
-   , hive.tpch_1000.item
+   , hive.tpcds_1000.date_dim d1
+   , hive.tpcds_1000.date_dim d2
+   , hive.tpcds_1000.date_dim d3
+   , hive.tpcds_1000.store
+   , hive.tpcds_1000.customer
+   , hive.tpcds_1000.customer_demographics cd1
+   , hive.tpcds_1000.customer_demographics cd2
+   , hive.tpcds_1000.promotion
+   , hive.tpcds_1000.household_demographics hd1
+   , hive.tpcds_1000.household_demographics hd2
+   , hive.tpcds_1000.customer_address ad1
+   , hive.tpcds_1000.customer_address ad2
+   , hive.tpcds_1000.income_band ib1
+   , hive.tpcds_1000.income_band ib2
+   , hive.tpcds_1000.item
    WHERE ("ss_store_sk" = "s_store_sk")
       AND ("ss_sold_date_sk" = "d1"."d_date_sk")
       AND ("ss_customer_sk" = "c_customer_sk")

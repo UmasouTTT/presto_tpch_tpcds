@@ -8,14 +8,14 @@ SELECT
 , "sum"("sr_net_loss") "store_returns_loss"
 , "sum"("cs_net_profit") "catalog_sales_profit"
 FROM
-  hive.tpch_1000.store_sales
-, hive.tpch_1000.store_returns
-, hive.tpch_1000.catalog_sales
-, hive.tpch_1000.date_dim d1
-, hive.tpch_1000.date_dim d2
-, hive.tpch_1000.date_dim d3
-, hive.tpch_1000.store
-, hive.tpch_1000.item
+  hive.tpcds_1000.store_sales
+, hive.tpcds_1000.store_returns
+, hive.tpcds_1000.catalog_sales
+, hive.tpcds_1000.date_dim d1
+, hive.tpcds_1000.date_dim d2
+, hive.tpcds_1000.date_dim d3
+, hive.tpcds_1000.store
+, hive.tpcds_1000.item
 WHERE ("d1"."d_moy" = 4)
    AND ("d1"."d_year" = 2001)
    AND ("d1"."d_date_sk" = "ss_sold_date_sk")

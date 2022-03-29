@@ -6,8 +6,8 @@ WITH
    , "sr_store_sk" "ctr_store_sk"
    , "sum"("sr_return_amt") "ctr_total_return"
    FROM
-     hive.tpch_1000.store_returns
-   , hive.tpch_1000.date_dim
+     hive.tpcds_1000.store_returns
+   , hive.tpcds_1000.date_dim
    WHERE ("sr_returned_date_sk" = "d_date_sk")
       AND ("d_year" = 2000)
    GROUP BY "sr_customer_sk", "sr_store_sk"
@@ -15,8 +15,8 @@ WITH
 SELECT "c_customer_id"
 FROM
   customer_total_return ctr1
-, hive.tpch_1000.store
-, hive.tpch_1000.customer
+, hive.tpcds_1000.store
+, hive.tpcds_1000.customer
 WHERE ("ctr1"."ctr_total_return" > (
       SELECT ("avg"("ctr_total_return") * DECIMAL '1.2')
       FROM

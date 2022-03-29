@@ -4,9 +4,9 @@ SELECT
 , "i_brand" "brand"
 , "sum"("ss_ext_sales_price") "ext_price"
 FROM
-  hive.tpch_1000.date_dim
-, hive.tpch_1000.store_sales
-, hive.tpch_1000.item
+  hive.tpcds_1000.date_dim
+, hive.tpcds_1000.store_sales
+, hive.tpcds_1000.item
 WHERE ("d_date_sk" = "ss_sold_date_sk")
    AND ("ss_item_sk" = "i_item_sk")
    AND ("i_manager_id" = 28)

@@ -4,10 +4,10 @@ FROM
   (
    SELECT "count"(*) "amc"
    FROM
-     hive.tpch_1000.web_sales
-   , hive.tpch_1000.household_demographics
-   , hive.tpch_1000.time_dim
-   , hive.tpch_1000.web_page
+     hive.tpcds_1000.web_sales
+   , hive.tpcds_1000.household_demographics
+   , hive.tpcds_1000.time_dim
+   , hive.tpcds_1000.web_page
    WHERE ("ws_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ws_ship_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ws_web_page_sk" = "web_page"."wp_web_page_sk")
@@ -18,10 +18,10 @@ FROM
 , (
    SELECT "count"(*) "pmc"
    FROM
-     hive.tpch_1000.web_sales
-   , hive.tpch_1000.household_demographics
-   , hive.tpch_1000.time_dim
-   , hive.tpch_1000.web_page
+     hive.tpcds_1000.web_sales
+   , hive.tpcds_1000.household_demographics
+   , hive.tpcds_1000.time_dim
+   , hive.tpcds_1000.web_page
    WHERE ("ws_sold_time_sk" = "time_dim"."t_time_sk")
       AND ("ws_ship_hdemo_sk" = "household_demographics"."hd_demo_sk")
       AND ("ws_web_page_sk" = "web_page"."wp_web_page_sk")

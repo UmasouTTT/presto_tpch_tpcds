@@ -8,11 +8,11 @@ SELECT
 , "avg"("ss_coupon_amt") "agg3"
 , "avg"("ss_sales_price") "agg4"
 FROM
-  hive.tpch_1000.store_sales
-, hive.tpch_1000.customer_demographics
-, hive.tpch_1000.date_dim
-, hive.tpch_1000.store
-, hive.tpch_1000.item
+  hive.tpcds_1000.store_sales
+, hive.tpcds_1000.customer_demographics
+, hive.tpcds_1000.date_dim
+, hive.tpcds_1000.store
+, hive.tpcds_1000.item
 WHERE ("ss_sold_date_sk" = "d_date_sk")
    AND ("ss_item_sk" = "i_item_sk")
    AND ("ss_store_sk" = "s_store_sk")

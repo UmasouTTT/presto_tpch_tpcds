@@ -10,10 +10,10 @@ FROM
    , "ss_customer_sk"
    , (CASE WHEN ("sr_return_quantity" IS NOT NULL) THEN (("ss_quantity" - "sr_return_quantity") * "ss_sales_price") ELSE ("ss_quantity" * "ss_sales_price") END) "act_sales"
    FROM
-     (hive.tpch_1000.store_sales
-   LEFT JOIN hive.tpch_1000.store_returns ON ("sr_item_sk" = "ss_item_sk")
+     (hive.tpcds_1000.store_sales
+   LEFT JOIN hive.tpcds_1000.store_returns ON ("sr_item_sk" = "ss_item_sk")
       AND ("sr_ticket_number" = "ss_ticket_number"))
-   , hive.tpch_1000.reason
+   , hive.tpcds_1000.reason
    WHERE ("sr_reason_sk" = "r_reason_sk")
       AND ("r_reason_desc" = 'reason 28                                                                                           ')
 )  t

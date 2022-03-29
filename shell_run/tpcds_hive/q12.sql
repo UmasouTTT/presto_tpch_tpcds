@@ -5,12 +5,12 @@ SELECT
 , "i_category"
 , "i_class"
 , "i_current_price"
-, "sum"("ws_ext_sales_price") "hive.tpch_1000.itemrevenue"
+, "sum"("ws_ext_sales_price") "hive.tpcds_1000.itemrevenue"
 , (("sum"("ws_ext_sales_price") * 100) / "sum"("sum"("ws_ext_sales_price")) OVER (PARTITION BY "i_class")) "revenueratio"
 FROM
-  hive.tpch_1000.web_sales
-, hive.tpch_1000.item
-, hive.tpch_1000.date_dim
+  hive.tpcds_1000.web_sales
+, hive.tpcds_1000.item
+, hive.tpcds_1000.date_dim
 WHERE ("ws_item_sk" = "i_item_sk")
    AND ("i_category" IN ('Sports                                            ', 'Books                                             ', 'Home                                              '))
    AND ("ws_sold_date_sk" = "d_date_sk")

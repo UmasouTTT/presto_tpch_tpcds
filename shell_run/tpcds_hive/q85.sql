@@ -5,14 +5,14 @@ SELECT
 , "avg"("wr_refunded_cash")
 , "avg"("wr_fee")
 FROM
-  hive.tpch_1000.web_sales
-, hive.tpch_1000.web_returns
-, hive.tpch_1000.web_page
-, hive.tpch_1000.customer_demographics cd1
-, hive.tpch_1000.customer_demographics cd2
-, hive.tpch_1000.customer_address
-, hive.tpch_1000.date_dim
-, hive.tpch_1000.reason
+  hive.tpcds_1000.web_sales
+, hive.tpcds_1000.web_returns
+, hive.tpcds_1000.web_page
+, hive.tpcds_1000.customer_demographics cd1
+, hive.tpcds_1000.customer_demographics cd2
+, hive.tpcds_1000.customer_address
+, hive.tpcds_1000.date_dim
+, hive.tpcds_1000.reason
 WHERE ("ws_web_page_sk" = "wp_web_page_sk")
    AND ("ws_item_sk" = "wr_item_sk")
    AND ("ws_order_number" = "wr_order_number")

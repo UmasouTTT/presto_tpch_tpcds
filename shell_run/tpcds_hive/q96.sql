@@ -1,10 +1,10 @@
  
 SELECT "count"(*)
 FROM
-  hive.tpch_1000.store_sales
-, hive.tpch_1000.household_demographics
-, hive.tpch_1000.time_dim
-, hive.tpch_1000.store
+  hive.tpcds_1000.store_sales
+, hive.tpcds_1000.household_demographics
+, hive.tpcds_1000.time_dim
+, hive.tpcds_1000.store
 WHERE ("ss_sold_time_sk" = "time_dim"."t_time_sk")
    AND ("ss_hdemo_sk" = "household_demographics"."hd_demo_sk")
    AND ("ss_store_sk" = "s_store_sk")
