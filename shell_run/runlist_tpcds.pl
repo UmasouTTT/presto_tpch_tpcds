@@ -76,7 +76,7 @@ close VARADA_LOG;
 print "***************************************Hive Warm**************************************************\n";
 chdir '../';
 chdir 'tpcds_hive';
-my @queries = glob '*.sql';
+@queries = glob '*.sql';
 for my $query ( @queries ) {
 
 	print "Warming Query : $query\n";
@@ -107,7 +107,7 @@ open(ORC_HIVE_LOG, ">orc_hive_tpcds.log") or die "can not open hive.log";
 
 chdir '../';
 chdir 'tpcds_varada_orc';
-my @queries = glob '*.sql';
+@queries = glob '*.sql';
 
 print "*********************************ORC******************************************************"
 #
@@ -164,7 +164,7 @@ close ORC_VARADA_LOG;
 print "***************************************Hive Warm**************************************************\n";
 chdir '../';
 chdir 'tpcds_hive_orc';
-my @queries = glob '*.sql';
+@queries = glob '*.sql';
 for my $query ( @queries ) {
 
 	print "Warming Query : $query\n";
