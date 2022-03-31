@@ -3,7 +3,7 @@ import copy
 import matplotlib.pyplot as plt
 import numpy as np
 
-file = "./mix/"
+file = "./orc_tpcds_1000/"
 drop_queries = []
 
 # connectors
@@ -44,46 +44,24 @@ def analysis(results, exps):
     # analysis
     print("compare hive with varada ...")
     # warm
-    avg_0 = 0
-    max_0 = 0
-    for exp in exps:
-        avg_0 += (results["hive"]["0"][exp] - results["varada"]["0"][exp]) / results["hive"]["0"][exp]
-        max_0 = max(max_0, (results["hive"]["0"][exp] - results["varada"]["0"][exp]) / results["hive"]["0"][exp])
-    avg_0 /= len(exps)
-    print("round 0 : avg increase : {}, max increase : {}".format(avg_0, max_0))
-    # 1
-    avg_1 = 0
-    max_1 = 0
-    for exp in exps:
-        avg_1 += (results["hive"]["0"][exp] - results["varada"]["1"][exp]) / results["hive"]["0"][exp]
-        max_1 = max(max_1, (results["hive"]["0"][exp] - results["varada"]["1"][exp]) / results["hive"]["0"][exp])
-    avg_1 /= len(exps)
-    print("round 1 : avg increase : {}, max increase : {}".format(avg_1, max_1))
-    # 2
-    avg_2 = 0
-    max_2 = 0
-    for exp in exps:
-        avg_2 += (results["hive"]["0"][exp] - results["varada"]["2"][exp]) / results["hive"]["0"][exp]
-        max_2 = max(max_2, (results["hive"]["0"][exp] - results["varada"]["2"][exp]) / results["hive"]["0"][exp])
-    avg_2 /= len(exps)
-    print("round 2 : avg increase : {}, max increase : {}".format(avg_2, max_2))
-    # 3
-    # avg_3 = 0
-    # max_3 = 0
-    # for exp in exps:
-    #     avg_3 += (results["hive"]["0"][exp] - results["varada"]["3"][exp]) / results["hive"]["0"][exp]
-    #     max_3 = max(max_3, (results["hive"]["0"][exp] - results["varada"]["3"][exp]) / results["hive"]["0"][exp])
-    # avg_3 /= len(exps)
-    # print("round 3 : avg increase : {}, max increase : {}".format(avg_3, max_3))
+    for turn in range(0, len(results["varada"])):
+        _avg = 0
+        _max = 0
+        _t = 0
+        for exp in exps:
+            _avg += (results["hive"]["0"][exp] - results["varada"][str(turn)][exp]) / results["hive"]["0"][exp]
+            _t += results["varada"][str(turn)][exp] / results["hive"]["0"][exp]
+            _max = max(_max, (results["hive"]["0"][exp] - results["varada"][str(turn)][exp]) / results["hive"]["0"][exp])
+        _avg /= len(exps)
+        _t /= len(exps)
+        print("round {} : avg increase : {}, max increase : {}, time : {}".format(turn, _avg, _max, _t))
     # whole time
     for type in results:
-        print("Connector is {}".format(type))
         for turn in results[type]:
-            print("Turn is {}".format(turn))
             whole_time = 0
             for exp in results[type][turn]:
                 whole_time += results[type][turn][exp]
-            print("Whole time is {}".format(whole_time))
+            print("For {} turn {} Whole time is {}".format(type, turn, whole_time))
             results[type][turn]["whole_time"] = whole_time
 
 def get_exps():
@@ -100,9 +78,9 @@ def get_exps():
 
 def draw_pic():
     # pic config
-    plt.figure(figsize=(13, 5))
+    plt.figure(figsize=(15, 5))
     bar_width = 15
-    color = ["red", "dodgerblue", "orange", "grey", "green"]
+    color = ["red", "dodgerblue", "orange", "grey", "green", "black", "yellow"]
 
     # draw
     logs = connector_logs()
@@ -166,27 +144,51 @@ def draw_pic():
     # 展示
     # plt.legend( ncol=3, frameon=False, bbox_to_anchor=(0, 1))
     # plt.legend('boxoff')
-    plt.legend(loc='upper center', ncol=5, frameon=False)
+    plt.legend(loc='upper center', ncol=6, frameon=False)
 
 
     plt.show()
 
 
-def draw_pic_for_whole_time():
+def draw_pic_last_turn():
     # pic config
-    plt.figure(figsize=(13, 5))
-    bar_width = 15
+    plt.figure(figsize=(15, 5))
+    bar_width = 35
     color = ["red", "dodgerblue", "orange", "grey", "green"]
 
     # draw
-    x = []
+    logs = connector_logs()
+    results = resolve_results(logs)
 
-    # parquet / orc
-    y = []
+    # exps = []
+    # for i in range(1, 23):
+    #     if i == 21:
+    #         continue
+    #     if i < 10:
+    #         exps.append("q0" + str(i))
+    #     else:
+    #         exps.append("q" + str(i))
+    exps = get_exps()
 
-    for i in range(len(y)):
-        start = i * 100
-        x = [start + j * bar_width for j in range(2)]
+
+    analysis(results, exps)
+    # get y
+    ys = []
+    for connector in results:
+        for type in results[connector]:
+            if type != str(len(results[connector]) - 1):
+                continue
+            type_y = []
+            for exp in exps:
+                type_y.append(results[connector][type][exp])
+            ys.append([connector + "_" + type, copy.deepcopy(type_y)])
+    # get x
+    xs = [[] for i in range(len(ys))]
+    x_ticks = []
+    for i in range(len(exps)):
+        start = i * 80
+        x = [start + j * bar_width for j in range(len(xs))]
+        x_ticks.append(x[int(len(x)/2)])
         for _ in range(len(xs)):
             xs[_].append(x[_])
 
@@ -223,7 +225,8 @@ def draw_pic_for_whole_time():
 
     plt.show()
 
-
+draw_pic()
+# draw_pic_last_turn()
 
 
 
