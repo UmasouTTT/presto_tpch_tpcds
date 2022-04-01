@@ -28,7 +28,7 @@ chdir $SCRIPT_PATH;
 chdir 'tpcds_hive';
 my @queries = glob '*.sql';
 for my $query ( @queries ) {
-    if(grep /^query/, @selected_queries ){
+    if(grep /^$query$/, @selected_queries ){
         print "Warming Query : $query\n";
         my $warmStart = time();
         my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query)";
@@ -42,7 +42,7 @@ for my $query ( @queries ) {
 
 } # end for
 for my $query ( @queries ) {
-    if(grep /^query/, @selected_queries ){
+    if(grep /^$query$/, @selected_queries ){
         print "Executing Query : $query\n";
         my $warmStart = time();
         my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query)";
@@ -61,10 +61,10 @@ close HIVE_LOG;
 print "***************************************Varada Warm**************************************************\n";
 chdir '../';
 chdir 'tpcds_varada';
-my @queries = glob '*.sql';
+@queries = glob '*.sql';
 
 for my $query ( @queries ) {
-    if(grep /^query/, @selected_queries ){
+    if(grep /^$query$/, @selected_queries ){
         print "Warming Query : $query\n";
         my $warmStart = time();
         my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
@@ -82,7 +82,7 @@ for my $query ( @queries ) {
 # turn one
 print "***************************************Varada Turn One**************************************************\n";
 for my $query ( @queries ) {
-    if(grep /^query/, @selected_queries ){
+    if(grep /^$query$/, @selected_queries ){
         print "Turn one : $query\n";
         my $warmStart = time();
         my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
@@ -101,7 +101,7 @@ for my $query ( @queries ) {
 # turn two
 print "***************************************Varada Turn Two**************************************************\n";
 for my $query ( @queries ) {
-    if(grep /^query/, @selected_queries ){
+    if(grep /^$query$/, @selected_queries ){
         print "Warming Query : $query\n";
         my $warmStart = time();
         my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
@@ -119,7 +119,7 @@ for my $query ( @queries ) {
 
 print "***************************************Varada Turn Three**************************************************\n";
 for my $query ( @queries ) {
-    if(grep /^query/, @selected_queries ){
+    if(grep /^$query$/, @selected_queries ){
         print "Warming Query : $query\n";
         my $warmStart = time();
         my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
@@ -137,7 +137,7 @@ for my $query ( @queries ) {
 
 print "***************************************Varada Turn Four**************************************************\n";
 for my $query ( @queries ) {
-    if(grep /^query/, @selected_queries ){
+    if(grep /^$query$/, @selected_queries ){
         print "Warming Query : $query\n";
         my $warmStart = time();
         my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
