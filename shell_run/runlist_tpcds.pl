@@ -28,31 +28,29 @@ chdir $SCRIPT_PATH;
 chdir 'tpcds_hive';
 my @queries = glob '*.sql';
 for my $query ( @queries ) {
-    if(grep /^$query$/, @selected_queries ){
-        print "Warming Query : $query\n";
-        my $warmStart = time();
-        my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query)";
-        my @warnoutput=`$cmd`;
 
-        my $warmEnd = time();
-        my $warmTime = $warmEnd - $warmStart ;
-        print "Warmed Query : $query In $warmTime secs\n";
-        print HIVE_LOG "$query,0 : $warmTime\n";
-    }
+	print "Warming Query : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query)";
+	my @warnoutput=`$cmd`;
+
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print HIVE_LOG "$query,0 : $warmTime\n";
 
 } # end for
 for my $query ( @queries ) {
-    if(grep /^$query$/, @selected_queries ){
-        print "Executing Query : $query\n";
-        my $warmStart = time();
-        my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query)";
-        my @warnoutput=`$cmd`;
 
-        my $warmEnd = time();
-        my $warmTime = $warmEnd - $warmStart ;
-        print "Warmed Query : $query In $warmTime secs\n";
-        print HIVE_LOG "$query,1 : $warmTime\n";
-    }
+	print "Executing Query : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query)";
+	my @warnoutput=`$cmd`;
+
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print HIVE_LOG "$query,1 : $warmTime\n";
 
 } # end for
 close HIVE_LOG;
@@ -61,96 +59,86 @@ close HIVE_LOG;
 print "***************************************Varada Warm**************************************************\n";
 chdir '../';
 chdir 'tpcds_varada';
-@queries = glob '*.sql';
+my @queries = glob '*.sql';
 
 for my $query ( @queries ) {
-    if(grep /^$query$/, @selected_queries ){
-        print "Warming Query : $query\n";
-        my $warmStart = time();
-        my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
-        my @warnoutput=`$cmd`;
+	print "Warming Query : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
+	my @warnoutput=`$cmd`;
 
-        my $warmEnd = time();
-        my $warmTime = $warmEnd - $warmStart ;
-        print "Warmed Query : $query In $warmTime secs\n";
-        print VARADA_LOG "$query,0 : $warmTime\n";
-        sleep 15;
-    }
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print VARADA_LOG "$query,0 : $warmTime\n";
 
+    sleep 10;
 } # end for
 #
 # turn one
 print "***************************************Varada Turn One**************************************************\n";
 for my $query ( @queries ) {
-    if(grep /^$query$/, @selected_queries ){
-        print "Turn one : $query\n";
-        my $warmStart = time();
-        my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
-        my @warnoutput=`$cmd`;
 
-        my $warmEnd = time();
-        my $warmTime = $warmEnd - $warmStart ;
-        print "Warmed Query : $query In $warmTime secs\n";
-        print VARADA_LOG "$query,1 : $warmTime\n";
+	print "Turn one : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
+	my @warnoutput=`$cmd`;
 
-        sleep 15;
-    }
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print VARADA_LOG "$query,1 : $warmTime\n";
 
+    sleep 10;
 } # end for
 #
 # turn two
 print "***************************************Varada Turn Two**************************************************\n";
 for my $query ( @queries ) {
-    if(grep /^$query$/, @selected_queries ){
-        print "Warming Query : $query\n";
-        my $warmStart = time();
-        my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
-        my @warnoutput=`$cmd`;
 
-        my $warmEnd = time();
-        my $warmTime = $warmEnd - $warmStart ;
-        print "Warmed Query : $query In $warmTime secs\n";
-        print VARADA_LOG "$query,2 : $warmTime\n";
+	print "Warming Query : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
+	my @warnoutput=`$cmd`;
 
-        sleep 15;
-    }
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print VARADA_LOG "$query,2 : $warmTime\n";
 
+    sleep 10;
 } # end for
 
 print "***************************************Varada Turn Three**************************************************\n";
 for my $query ( @queries ) {
-    if(grep /^$query$/, @selected_queries ){
-        print "Warming Query : $query\n";
-        my $warmStart = time();
-        my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
-        my @warnoutput=`$cmd`;
 
-        my $warmEnd = time();
-        my $warmTime = $warmEnd - $warmStart ;
-        print "Warmed Query : $query In $warmTime secs\n";
-        print VARADA_LOG "$query,3 : $warmTime\n";
+	print "Warming Query : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
+	my @warnoutput=`$cmd`;
 
-        sleep 15;
-    }
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print VARADA_LOG "$query,3 : $warmTime\n";
 
+    sleep 10;
 } # end for
 
 print "***************************************Varada Turn Four**************************************************\n";
 for my $query ( @queries ) {
-    if(grep /^$query$/, @selected_queries ){
-        print "Warming Query : $query\n";
-        my $warmStart = time();
-        my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
-        my @warnoutput=`$cmd`;
 
-        my $warmEnd = time();
-        my $warmTime = $warmEnd - $warmStart ;
-        print "Warmed Query : $query In $warmTime secs\n";
-        print VARADA_LOG "$query,4 : $warmTime\n";
+	print "Warming Query : $query\n";
+	my $warmStart = time();
+	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog varada -f ./$query)";
+	my @warnoutput=`$cmd`;
 
-        sleep 15;
-    }
+	my $warmEnd = time();
+	my $warmTime = $warmEnd - $warmStart ;
+	print "Warmed Query : $query In $warmTime secs\n";
+	print VARADA_LOG "$query,4 : $warmTime\n";
 
+    sleep 10;
 } # end for
 
 close VARADA_LOG;

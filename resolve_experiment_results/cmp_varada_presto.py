@@ -3,7 +3,7 @@ import copy
 import matplotlib.pyplot as plt
 import numpy as np
 
-file = "./parquet_tpcds_1000/"
+file = "./varada_30/"
 drop_queries = []
 #selected_queries = ["q01", "q03", "q07", "q09", "q10", "q18", "q21", "q26", "q27", "q28", "q33", "q36", "q37"
                     # , "q42", "q44", "q52", "q53", "q54", "q55", "q56", "q61", "q63", "q64", "q71", "q76", "q80", "q82",
