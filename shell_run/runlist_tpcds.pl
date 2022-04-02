@@ -40,19 +40,7 @@ for my $query ( @queries ) {
 	print HIVE_LOG "$query,0 : $warmTime\n";
 
 } # end for
-for my $query ( @queries ) {
 
-	print "Executing Query : $query\n";
-	my $warmStart = time();
-	my $cmd="(/home/ec2-user/bigdata/trino/trino-server-370/bin/trino --server localhost:8080 --catalog hive -f ./$query)";
-	my @warnoutput=`$cmd`;
-
-	my $warmEnd = time();
-	my $warmTime = $warmEnd - $warmStart ;
-	print "Warmed Query : $query In $warmTime secs\n";
-	print HIVE_LOG "$query,1 : $warmTime\n";
-
-} # end for
 close HIVE_LOG;
 
 ## warm
@@ -138,7 +126,7 @@ for my $query ( @queries ) {
 	print "Warmed Query : $query In $warmTime secs\n";
 	print VARADA_LOG "$query,4 : $warmTime\n";
 
-    sleep 10;
+    sleep 10;t56
 } # end for
 
 close VARADA_LOG;

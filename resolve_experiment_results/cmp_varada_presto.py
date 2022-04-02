@@ -3,11 +3,12 @@ import copy
 import matplotlib.pyplot as plt
 import numpy as np
 
-file = "./varada_30/"
+file = "./sleep_10/"
+# drop_queries = ["q14_1", "q64"]
 drop_queries = []
-#selected_queries = ["q01", "q03", "q07", "q09", "q10", "q18", "q21", "q26", "q27", "q28", "q33", "q36", "q37"
-                    # , "q42", "q44", "q52", "q53", "q54", "q55", "q56", "q61", "q63", "q64", "q71", "q76", "q80", "q82",
-                    # "q88", "q90", "q96"]
+selected_queries = ["q01", "q03", "q07", "q09", "q10", "q18", "q21", "q26", "q27", "q28", "q33", "q36", "q37"
+                    , "q42", "q44", "q52", "q53", "q54", "q55", "q56", "q61", "q63", "q64", "q71", "q76", "q80", "q82",
+                    "q88", "q90", "q96"]
 
 # connectors
 def connector_logs():
@@ -32,8 +33,10 @@ def resolve_results(log_paths):
             sec = int(content[1])
             exp = content[0]
             query = exp.split(",")[0]
-            # if query.split(".")[0] not in selected_queries:
-            #     continue
+            if len(drop_queries) > 0 and query.split(".")[0] in drop_queries:
+                continue
+            if len(selected_queries) > 0 and query.split(".")[0] not in selected_queries:
+                continue
             time = exp.split(",")[1].strip()
             if time not in results[connector]:
                 results[connector][time] = {}
@@ -75,8 +78,10 @@ def get_exps():
             if "hive" in f:
                 _f = open(os.path.join(root, f), "r+", encoding="utf-8")
                 for line in _f:
-                    # if line.strip().split(".")[0] not in selected_queries:
-                    #     continue
+                    if len(drop_queries) > 0 and line.strip().split(".")[0] in drop_queries:
+                        continue
+                    if len(selected_queries) > 0 and line.strip().split(".")[0] not in selected_queries:
+                        continue
                     exps.append(line.strip().split(".")[0])
                 _f.close()
     return exps
